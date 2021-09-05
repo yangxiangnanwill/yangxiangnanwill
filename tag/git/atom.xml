@@ -11,28 +11,28 @@
     <category term="EXCEL" />
     <category term="Linux" />
     <category term="Cron" />
+    <category term="Spring Cloud" />
     <category term="BeetlSql" />
     <category term="Git" />
     <category term="Other" />
     <category term="ProtoBuffer" />
-    <category term="随笔" />
-    <category term="Spring Cloud" />
     <category term="IDEA" />
     <category term="Stream" />
     <category term="Debug" />
+    <category term="随笔" />
     <category term="Poi" />
     <category term="EasyExcel" />
     <category term="Excel" />
     <category term="测试" />
-    <category term="JAVA工具类整理" />
     <category term="Typora" />
-    <category term="IDEA常用功能整理" />
+    <category term="JAVA工具类整理" />
     <category term="MyBatis" />
     <category term="SpringBoot" />
     <category term="爬虫" />
     <category term="Quartz" />
     <category term="Jsoup" />
     <category term="Http" />
+    <category term="IDEA常用功能整理" />
     <entry>
         <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Other/Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B/</id>
         <title>Git分支管理开发流程</title>
