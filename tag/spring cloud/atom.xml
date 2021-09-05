@@ -3,23 +3,23 @@
     <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io</id>
     <title>Will • Posts by &#34;spring cloud&#34; tag</title>
     <link href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io" />
-    <updated>2021-07-15T13:10:32.254Z</updated>
+    <updated>2021-07-18T13:53:36.834Z</updated>
     <category term="Docker" />
     <category term="Archery" />
+    <category term="Linux" />
+    <category term="Cron" />
     <category term="JAVA" />
     <category term="POI" />
     <category term="EXCEL" />
-    <category term="Linux" />
-    <category term="Cron" />
     <category term="BeetlSql" />
     <category term="Git" />
     <category term="Other" />
     <category term="ProtoBuffer" />
     <category term="随笔" />
-    <category term="Spring Cloud" />
     <category term="IDEA" />
     <category term="Stream" />
     <category term="Debug" />
+    <category term="Spring Cloud" />
     <category term="JAVA工具类整理" />
     <category term="Poi" />
     <category term="EasyExcel" />
@@ -34,9 +34,9 @@
     <category term="Jsoup" />
     <category term="Http" />
     <entry>
-        <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/15/Spring/Spring-Cloud-Alibaba(4)-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99/</id>
+        <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/18/Spring/Spring-Cloud-Alibaba(4)-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99/</id>
         <title>Spring Cloud Alibaba(4)-服务容错</title>
-        <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/15/Spring/Spring-Cloud-Alibaba(4)-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99/"/>
+        <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/18/Spring/Spring-Cloud-Alibaba(4)-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99/"/>
         <content type="html">&lt;h1 id=&#34;高并发带来的问题&#34;&gt;&lt;a href=&#34;#高并发带来的问题&#34; class=&#34;headerlink&#34; title=&#34;高并发带来的问题&#34;&gt;&lt;/a&gt;高并发带来的问题&lt;/h1&gt;&lt;p&gt;在微服务架构中，我们将业务拆分成一个个的服务，服务与服务之间可以相互调用，但是由于网络原因或者自身的原因，服务并不能保证服务的100%可用，如果单个服务出现问题，调用这个服务就会出现网络延迟，此时若有大量的网络涌入，会形成任务堆积，最终导致服务瘫痪。&lt;/p&gt;
 &lt;p&gt;接下来我们通过一个案例，来模拟一下一个高并发的场景。&lt;/p&gt;
 &lt;ul&gt;
@@ -74,7 +74,7 @@
 &lt;h1 id=&#34;常见容错方案&#34;&gt;&lt;a href=&#34;#常见容错方案&#34; class=&#34;headerlink&#34; title=&#34;常见容错方案&#34;&gt;&lt;/a&gt;常见容错方案&lt;/h1&gt;&lt;p&gt;要防止雪崩的扩散，我们就要做好服务的容错，容错说白了就是保护自己不被猪队友拖垮的一些措施, 下面介绍常见的服务容错思路和组件。&lt;/p&gt;
 &lt;h2 id=&#34;常见的容错思路&#34;&gt;&lt;a href=&#34;#常见的容错思路&#34; class=&#34;headerlink&#34; title=&#34;常见的容错思路&#34;&gt;&lt;/a&gt;常见的容错思路&lt;/h2&gt;&lt;p&gt;常见的容错思路有隔离、超时、限流、熔断、降级这几种，下面分别介绍一下。&lt;/p&gt;
 &lt;h3 id=&#34;隔离&#34;&gt;&lt;a href=&#34;#隔离&#34; class=&#34;headerlink&#34; title=&#34;隔离&#34;&gt;&lt;/a&gt;隔离&lt;/h3&gt;&lt;p&gt;它是指将系统按照一定的原则划分为若干个服务模块，各个模块之间相对独立，无强依赖。当有故障发生时，能将问题和影响隔离在某个模块内部，而不扩散风险，不波及其它模块，不影响整体的系统服务。常见的隔离方式有：线程池隔离和信号量隔离．&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180103%2Fa483a761cb7f492f9297b587e8ba6a9d.png&amp;refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1628933602&amp;t=7a5e6472f90676f541ed3e85e7e98b10&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/W8Nehj&#34;&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8Nehj.png&#34; alt=&#34;W8Nehj.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;超时&#34;&gt;&lt;a href=&#34;#超时&#34; class=&#34;headerlink&#34; title=&#34;超时&#34;&gt;&lt;/a&gt;超时&lt;/h3&gt;&lt;p&gt;在上游服务调用下游服务的时候，设置一个最大响应时间，如果超过这个时间，下游未作出反应，就断开请求，释放掉线程。&lt;/p&gt;
 &lt;h3 id=&#34;限流&#34;&gt;&lt;a href=&#34;#限流&#34; class=&#34;headerlink&#34; title=&#34;限流&#34;&gt;&lt;/a&gt;限流&lt;/h3&gt;&lt;p&gt;限流就是限制系统的输入和输出流量已达到保护系统的目的。为了保证系统的稳固运行,一旦达到的需要限制的阈值,就需要限制流量并采取少量措施以完成限制流量的目的。&lt;/p&gt;
 &lt;h3 id=&#34;熔断&#34;&gt;&lt;a href=&#34;#熔断&#34; class=&#34;headerlink&#34; title=&#34;熔断&#34;&gt;&lt;/a&gt;熔断&lt;/h3&gt;&lt;p&gt;在互联网系统中，当下游服务因访问压力过大而响应变慢或失败，上游服务为了保护系统整体的可用性，可以暂时切断对下游服务的调用。这种牺牲局部，保全整体的措施就叫做熔断。&lt;/p&gt;
@@ -190,11 +190,212 @@
 &lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2021/07/d869eb55dcf31cd1.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;发送-highConcurrency-message1请求，再次测试&#34;&gt;&lt;a href=&#34;#发送-highConcurrency-message1请求，再次测试&#34; class=&#34;headerlink&#34; title=&#34;发送/highConcurrency/message1请求，再次测试&#34;&gt;&lt;/a&gt;发送&lt;code&gt;/highConcurrency/message1&lt;/code&gt;请求，再次测试&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2021/07/70b99c97f9b0c76b.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;补充：了解控制台的使用原理&#34;&gt;&lt;a href=&#34;#补充：了解控制台的使用原理&#34; class=&#34;headerlink&#34; title=&#34;补充：了解控制台的使用原理&#34;&gt;&lt;/a&gt;补充：了解控制台的使用原理&lt;/h3&gt;&lt;p&gt;Sentinel的控制台其实就是一个SpringBoot编写的程序。我们需要将我们的微服务程序注册到控制台上,即在微服务中指定控制台的地址, 并且还要开启一个跟控制台传递数据的端口, 控制台也可以通过此端口调用微服务中的监控程序获取微服务的各种信息。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/9434884/53381986-a0b73f00-39ad-11e9-90cf-b49158ae4b6f.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;入门案例-实现一个接口的限流&#34;&gt;&lt;a href=&#34;#入门案例-实现一个接口的限流&#34; class=&#34;headerlink&#34; title=&#34;入门案例[实现一个接口的限流]&#34;&gt;&lt;/a&gt;入门案例[实现一个接口的限流]&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;通过控制台为message1添加一个流控规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/W8YnaQ&#34;&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8YnaQ.png&#34; alt=&#34;W8YnaQ.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/W8Yl2q&#34;&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8Yl2q.png&#34; alt=&#34;W8Yl2q.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过控制台快速频繁访问, 观察效果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/W8YNa4&#34;&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8YNa4.png&#34; alt=&#34;W8YNa4.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;Sentinel的概念和功能&#34;&gt;&lt;a href=&#34;#Sentinel的概念和功能&#34; class=&#34;headerlink&#34; title=&#34;Sentinel的概念和功能&#34;&gt;&lt;/a&gt;Sentinel的概念和功能&lt;/h1&gt;&lt;h2 id=&#34;基本概念&#34;&gt;&lt;a href=&#34;#基本概念&#34; class=&#34;headerlink&#34; title=&#34;基本概念&#34;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;h3 id=&#34;资源&#34;&gt;&lt;a href=&#34;#资源&#34; class=&#34;headerlink&#34; title=&#34;资源&#34;&gt;&lt;/a&gt;资源&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;资源就是Sentinel要保护的东西&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;资源是 Sentinel 的关键概念。它可以是 Java 应用程序中的任何内容，可以是一个服务，也可以是一个方法，甚至可以是一段代码。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们入门案例中的message1方法就可以认为是一个资源&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;规则&#34;&gt;&lt;a href=&#34;#规则&#34; class=&#34;headerlink&#34; title=&#34;规则&#34;&gt;&lt;/a&gt;规则&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;规则就是用来定义如何进行保护资源的&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;作用在资源之上, 定义以什么样的方式保护资源，主要包括流量控制规则、熔断降级规则以及系统保护规则。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们入门案例中就是为message1资源设置了一种流控规则, 限制了进入message1的流量&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;重要功能&#34;&gt;&lt;a href=&#34;#重要功能&#34; class=&#34;headerlink&#34; title=&#34;重要功能&#34;&gt;&lt;/a&gt;重要功能&lt;/h2&gt;&lt;p&gt;Sentinel的主要功能就是容错，主要体现为下面这三个：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;流量控制&lt;br&gt;流量控制在网络传输中是一个常用的概念，它用于调整网络包的数据。任意时间到来的请求往往是随机不可控的，而系统的处理能力是有限的。我们需要根据系统的处理能力对流量进行控制。Sentinel 作为一个调配器，可以根据需要把随机的请求调整成合适的形状。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;熔断降级&lt;br&gt;当检测到调用链路中某个资源出现不稳定的表现，例如请求响应时间长或异常比例升高的时候，则对这个资源的调用进行限制，让请求快速失败，避免影响到其它的资源而导致级联故障。Sentinel 对这个问题采取了两种手段:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过并发线程数进行限制&lt;br&gt;Sentinel 通过限制资源并发线程的数量，来减少不稳定资源对其它资源的影响。当某个资源出现不稳定的情况下，例如响应时间变长，对资源的直接影响就是会造成线程数的逐步堆积。当线程数在特定资源上堆积到一定的数量之后，对该资源的新请求就会被拒绝。堆积的线程完成任务后才开始继续接收请求。&lt;/li&gt;
+&lt;li&gt;通过响应时间对资源进行降级&lt;br&gt;除了对并发线程数进行控制以外，Sentinel 还可以通过响应时间来快速降级不稳定的资源。当依赖的资源出现响应时间过长后，所有对该资源的访问都会被直接拒绝，直到过了指定的时间窗口之后才重新恢复。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Sentinel 和 Hystrix 的区别&lt;br&gt;两者的原则是一致的, 都是当一个资源出现问题时, 让其快速失败, 不要波及到其它服务但是在限制的手段上, 确采取了完全不一样的方法:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hystrix 采用的是线程池隔离的方式, 优点是做到了资源之间的隔离, 缺点是增加了线程切换的成本。&lt;/li&gt;
+&lt;li&gt;Sentinel 采用的是通过并发线程的数量和响应时间来对资源做限制。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;系统负载保护&lt;/p&gt;
+&lt;p&gt;Sentinel 同时提供系统维度的自适应保护能力。当系统负载较高的时候，如果还持续让请求进入可能会导致系统崩溃，无法响应。在集群环境下，会把本应这台机器承载的流量转发到其它的机器上去。如果这个时候其它的机器也处在一个边缘状态的时候，Sentinel 提供了对应的保护机制，让系统的入口流量和系统的负载达到一个平衡，保证系统在能力范围之内处理最多的请求。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;总之一句话: 我们需要做的事情，就是在Sentinel的资源上配置各种各样的规则，来实现各种容错的功能。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;Sentinel规则&#34;&gt;&lt;a href=&#34;#Sentinel规则&#34; class=&#34;headerlink&#34; title=&#34;Sentinel规则&#34;&gt;&lt;/a&gt;Sentinel规则&lt;/h2&gt;&lt;h3 id=&#34;流控规则&#34;&gt;&lt;a href=&#34;#流控规则&#34; class=&#34;headerlink&#34; title=&#34;流控规则&#34;&gt;&lt;/a&gt;流控规则&lt;/h3&gt;&lt;p&gt;流量控制，其原理是监控应用流量的QPS(每秒查询率) 或并发线程数等指标，当达到指定的阈值时对流量进行控制，以避免被瞬时的流量高峰冲垮，从而保障应用的高可用性。&lt;/p&gt;
+&lt;p&gt;点击簇点链路，我们就可以看到访问过的接口地址，然后点击对应的流控按钮，进入流控规则配置页面。新增流控规则界面如下:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/W8YBxx&#34;&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8YBxx.png&#34; alt=&#34;W8YBxx.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;资源名：唯一名称，默认是请求路径，可自定义&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;针对来源：指定对哪个微服务进行限流，默认指default，意思是不区分来源，全部限制&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;阈值类型/单机阈值：&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;QPS（每秒请求数量）: 当调用该接口的QPS达到阈值的时候，进行限流&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;线程数：当调用该接口的线程数达到阈值的时候，进行限流&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;是否集群：暂不需要集群&lt;/strong&gt;&lt;br&gt;接下来我们以QPS为例来研究限流规则的配置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;简单配置&#34;&gt;&lt;a href=&#34;#简单配置&#34; class=&#34;headerlink&#34; title=&#34;简单配置&#34;&gt;&lt;/a&gt;简单配置&lt;/h4&gt;&lt;p&gt;我们先做一个简单配置，设置阈值类型为QPS，单机阈值为3。即每秒请求量大于3的时候开始限流。&lt;/p&gt;
+&lt;p&gt;接下来，在流控规则页面就可以看到这个配置。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/W8YssK&#34;&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8YssK.png&#34; alt=&#34;W8YssK.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;然后快速访问&lt;code&gt;message1&lt;/code&gt; 接口，观察效果。此时发现，当QPS &amp;gt; 3的时候，服务就不能正常响应，而是返回Blocked by Sentinel (flow limiting)结果。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8YNa4.png&#34; alt=&#34;W8YNa4.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;配置流控模式&#34;&gt;&lt;a href=&#34;#配置流控模式&#34; class=&#34;headerlink&#34; title=&#34;配置流控模式&#34;&gt;&lt;/a&gt;配置流控模式&lt;/h4&gt;&lt;p&gt;点击上面设置流控规则的&lt;code&gt;编辑&lt;/code&gt;按钮，然后在编辑页面点击&lt;code&gt;高级选项&lt;/code&gt;，会看到有流控模式一栏。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/W8YhRI&#34;&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8YhRI.png&#34; alt=&#34;W8YhRI.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;sentinel共有三种流控模式，分别是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直接（默认）：接口达到限流条件时，开启限流&lt;/li&gt;
+&lt;li&gt;关联：当关联的资源达到限流条件时，开启限流 [适合做应用让步]&lt;/li&gt;
+&lt;li&gt;链路：当从某个接口过来的资源达到限流条件时，开启限流&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面呢分别演示三种模式.&lt;/p&gt;
+&lt;h5 id=&#34;直接流控模式&#34;&gt;&lt;a href=&#34;#直接流控模式&#34; class=&#34;headerlink&#34; title=&#34;直接流控模式&#34;&gt;&lt;/a&gt;直接流控模式&lt;/h5&gt;&lt;p&gt;直接流控模式是最简单的模式，当指定的接口达到限流条件时开启限流。上面案例使用的就是直接流控模式。&lt;/p&gt;
+&lt;h5 id=&#34;关联流控模式&#34;&gt;&lt;a href=&#34;#关联流控模式&#34; class=&#34;headerlink&#34; title=&#34;关联流控模式&#34;&gt;&lt;/a&gt;关联流控模式&lt;/h5&gt;&lt;p&gt;关联流控模式指的是，当指定接口关联的接口达到限流条件时，开启对指定接口开启限流。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;配置限流规则, 将流控模式设置为关联，关联资源设置为的&lt;code&gt;message2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;使用jmeter进行压力测试访问，&lt;strong&gt;注意QPS一定要大于0.3，即每秒请求大于等于三次。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;第4步：访问&lt;code&gt;message1&lt;/code&gt;,会发现已经被限流&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8YTL8.png&#34; alt=&#34;W8YTL8.png&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;链路流控模式&#34;&gt;&lt;a href=&#34;#链路流控模式&#34; class=&#34;headerlink&#34; title=&#34;链路流控模式&#34;&gt;&lt;/a&gt;链路流控模式&lt;/h5&gt;&lt;p&gt;链路流控模式指的是，当从某个接口过来的资源达到限流条件时，开启限流。它的功能有点类似于针对来源配置项，区别在于：针对来源是针对上级微服务，而链路流控是针对上级接口，也就是说它的粒度更细。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;OrderService&lt;/code&gt;中新建抽象接口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * 打印信息&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;printMessage&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;OrderServiceImpl&lt;/code&gt;进行实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@SentinelResource(&amp;quot;message&amp;quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;printMessage&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    System.out.println(&lt;span class=&#34;string&#34;&gt;&amp;quot;OrderService.printMessage&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在&lt;code&gt;message1&lt;/code&gt;、&lt;code&gt;message2&lt;/code&gt;中分别增加该调用方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@RequestMapping(&amp;quot;/message1&amp;quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; String &lt;span class=&#34;title&#34;&gt;message1&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    orderService.printMessage();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;message1&amp;quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@RequestMapping(&amp;quot;/message2&amp;quot;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; String &lt;span class=&#34;title&#34;&gt;message2&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    orderService.printMessage();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;message2&amp;quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;禁止收敛URL的入口 context&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;从1.6.3 版本开始，Sentinel Web filter默认收敛所有URL的入口context，因此链路限流不生效。&lt;br&gt;1.7.0 版本开始（对应SCA的2.1.1.RELEASE)，官方在CommonFilter 引入了WEB_CONTEXT_UNIFY 参数，用于控制是否收敛context。将其配置为 false 即可根据不同的URL 进行链路限流。SCA 2.1.1.RELEASE之后的版本,可以通过配置spring.cloud.sentinel.web-context-unify=false即可关闭收敛&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;sentinel:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;web-context-unify:&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Configuration&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;FilterContextConfig&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Bean&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; FilterRegistrationBean &lt;span class=&#34;title&#34;&gt;sentinelFilterRegistrationBean&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        FilterRegistrationBean registration = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; FilterRegistrationBean();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        registration.setFilter(&lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; CommonFilter());&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        registration.addUrlPatterns(&lt;span class=&#34;string&#34;&gt;&amp;quot;/*&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       &lt;span class=&#34;comment&#34;&gt;// 入口资源关闭聚合&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        registration.addInitParameter(CommonFilter.WEB_CONTEXT_UNIFY,&lt;span class=&#34;string&#34;&gt;&amp;quot;false&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        registration.setName(&lt;span class=&#34;string&#34;&gt;&amp;quot;sentinelFilter&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        registration.setOrder(&lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; registration;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;控制台配置限流规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/W8YzQ0&#34;&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8YzQ0.png&#34; alt=&#34;W8YzQ0.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分别通过&lt;code&gt;message1&lt;/code&gt; 和&lt;code&gt;message2&lt;/code&gt; 访问, 发现2没问题, 1的被限流了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;配置流控效果&#34;&gt;&lt;a href=&#34;#配置流控效果&#34; class=&#34;headerlink&#34; title=&#34;配置流控效果&#34;&gt;&lt;/a&gt;配置流控效果&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;快速失败（默认）: 直接失败，抛出异常，不做任何额外的处理，是最简单的效果&lt;/li&gt;
+&lt;li&gt;Warm Up：它从开始阈值到最大QPS阈值会有一个缓冲阶段，一开始的阈值是最大QPS阈值的1/3，然后慢慢增长，直到最大阈值，适用于将突然增大的流量转换为缓步增长的场景。&lt;/li&gt;
+&lt;li&gt;排队等待：让请求以均匀的速度通过，单机阈值为每秒通过数量，其余的排队等待； 它还会让设置一个超时时间，当请求超过超时间时间还未处理，则会被丢弃。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;配置降级规则&#34;&gt;&lt;a href=&#34;#配置降级规则&#34; class=&#34;headerlink&#34; title=&#34;配置降级规则&#34;&gt;&lt;/a&gt;配置降级规则&lt;/h4&gt;&lt;p&gt;降级规则就是设置当满足什么条件的时候，对服务进行降级。Sentinel提供了三个衡量条件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平均响应时间 ：当资源的平均响应时间超过阈值（以 ms 为单位）之后，资源进入准降级状态。&lt;br&gt;如果接下来 1s 内持续进入 5 个请求，它们的 RT都持续超过这个阈值，那么在接下的时间窗口（以 s 为单位）之内，就会对这个方法进行服务降级。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://imgtu.com/i/W8tio4&#34;&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/18/W8tio4.png&#34; alt=&#34;W8tio4.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;上述配置为当响应时间大于1毫秒的时候，接下来的十秒内该服务进行降级，十秒后回复正常，进行下一轮的判断。&lt;/p&gt;
+&lt;p&gt;注意:&lt;/p&gt;
+&lt;p&gt; Sentinel 默认统计的 RT 上限是 4900 ms，超出此阈值的都会算作 4900 ms，若需要变更此上限可以通过启动配置项 -Dcsp.sentinel.statistic.max.rt=xxx 来配置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;异常比例：当资源的每秒异常总数占通过量的比值超过阈值之后，资源进入降级状态，即在接下的时间窗口（以 s 为单位）之内，对这个方法的调用都会自动地返回。异常比率的阈值范围是 [0.0,1.0]。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;模拟一个异常&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;@RequestMapping(&amp;quot;&amp;#x2F;message1&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public String message1() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#x2F;&amp;#x2F;异常比例为0.33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    for (int i &amp;#x3D; 0; i &amp;lt; 30; i++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        if (i % 3 &amp;#x3D;&amp;#x3D; 0) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            throw new RuntimeException();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    return &amp;quot;message1&amp;quot;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;设置异常比例为0.25&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.bmp.ovh/imgs/2021/09/34f69b017981f9a6.png&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;异常数 ：当资源近 1 分钟的异常数目超过阈值之后会进行服务降级。注意由于统计时间窗口是分钟级别的，若时间窗口小于 60s，则结束熔断状态后仍可能再进入熔断状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.bmp.ovh/imgs/2021/09/14bfdc57aeca8152.png&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;问题：&lt;br&gt;流控规则和降级规则返回的异常页面是一样的，我们怎么来区分到底是什么原因导致的呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;配置热点规则&#34;&gt;&lt;a href=&#34;#配置热点规则&#34; class=&#34;headerlink&#34; title=&#34;配置热点规则&#34;&gt;&lt;/a&gt;配置热点规则&lt;/h4&gt;&lt;p&gt;热点参数流控规则是一种更细粒度的流控规则, 它允许将规则具体到参数上。&lt;/p&gt;
+&lt;h5 id=&#34;简单配置-1&#34;&gt;&lt;a href=&#34;#简单配置-1&#34; class=&#34;headerlink&#34; title=&#34;简单配置&#34;&gt;&lt;/a&gt;简单配置&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;编写代码&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;@RequestMapping(&amp;quot;&amp;#x2F;message3&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;@SentinelResource(&amp;quot;messages3&amp;quot;)&amp;#x2F;&amp;#x2F;注意这里必须使用这个注解标识,热点规则不生效&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public String message3(String name,Integer age) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    return name + age;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置热点规则&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/05/ySYaLxKuJf9sDOU.png&#34; alt=&#34;image-20210905201210835&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分别用两个参数访问,会发现只对第一个参数限流了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;热点规则增强使用&#34;&gt;&lt;a href=&#34;#热点规则增强使用&#34; class=&#34;headerlink&#34; title=&#34;热点规则增强使用&#34;&gt;&lt;/a&gt;热点规则增强使用&lt;/h5&gt;&lt;p&gt;参数例外项允许对一个参数的具体值进行流控&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;编辑刚才定义的规则,增加参数例外项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.bmp.ovh/imgs/2021/09/0d1b9c0cae07396d.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;授权规则&#34;&gt;&lt;a href=&#34;#授权规则&#34; class=&#34;headerlink&#34; title=&#34;授权规则&#34;&gt;&lt;/a&gt;授权规则&lt;/h3&gt;&lt;p&gt;很多时候，我们需要根据调用来源来判断该次请求是否允许放行，这时候可以使用 Sentinel 的来源&lt;br&gt;访问控制的功能。来源访问控制根据资源的请求来源（origin）限制资源是否通过：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若配置白名单，则只有请求来源位于白名单内时才可通过；&lt;/li&gt;
+&lt;li&gt;若配置黑名单，则请求来源位于黑名单时不通过，其余的请求通过。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.bmp.ovh/imgs/2021/09/94bc40c52a38bde8.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;上面的资源名和授权类型不难理解，但是流控应用怎么填写呢？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;其实这个位置要填写的是来源标识，Sentinel提供了&lt;code&gt;RequestOriginParser&lt;/code&gt;接口来处理来源。&lt;/p&gt;
+&lt;p&gt;只要Sentinel保护的接口资源被访问，Sentinel就会调用RequestOriginParser的实现类去解析访问来源。&lt;/p&gt;
+&lt;p&gt;下方有坑，请注意！！！！&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;图片占坑。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;==注意：由于上方配置流控规则是把收敛的接口都开放了，博猪在实现&lt;code&gt;RequestOriginParser&lt;/code&gt;接口处理来源，配置黑白名单时不生效，这个具体原因博猪还没进一步查看源码实现逻辑，可能是sentinel的一个bug，所以需要把注入的&lt;code&gt;FilterRegistrationBean&lt;/code&gt;去掉，配置文件中的&lt;code&gt;WEB_CONTEXT_UNIFY &lt;/code&gt;去掉！！==&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;自定义处理规则&#34;&gt;&lt;a href=&#34;#自定义处理规则&#34; class=&#34;headerlink&#34; title=&#34;自定义处理规则&#34;&gt;&lt;/a&gt;自定义处理规则&lt;/h4&gt;&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;@Component&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public class ServiceNameOriginParser implements RequestOriginParser &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    public String parseOrigin(HttpServletRequest httpServletRequest) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        String serviceName &amp;#x3D; httpServletRequest.getParameter(&amp;quot;serviceName&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        return serviceName;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h4 id=&#34;配置授权规则&#34;&gt;&lt;a href=&#34;#配置授权规则&#34; class=&#34;headerlink&#34; title=&#34;配置授权规则&#34;&gt;&lt;/a&gt;配置授权规则&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;解释一下配置含义：当seriviceName=pc时不能访问（黑名单）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.bmp.ovh/imgs/2021/09/ad32eb08f12b3954.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;访问配置地址，查看结果&#34;&gt;&lt;a href=&#34;#访问配置地址，查看结果&#34; class=&#34;headerlink&#34; title=&#34;访问配置地址，查看结果&#34;&gt;&lt;/a&gt;访问配置地址，查看结果&lt;/h4&gt;&lt;p&gt;访问&lt;a href=&#34;http://localhost:8091/highConcurrency/getMessage?serviceName=pc%EF%BC%8C%E6%9F%A5%E7%9C%8B%E7%BB%93%E6%9E%9C&#34;&gt;http://localhost:8091/highConcurrency/getMessage?serviceName=pc，查看结果&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;系统规则&#34;&gt;&lt;a href=&#34;#系统规则&#34; class=&#34;headerlink&#34; title=&#34;系统规则&#34;&gt;&lt;/a&gt;系统规则&lt;/h3&gt;&lt;p&gt;系统保护规则是从应用级别的入口流量进行控制，从单台机器的总体 Load、RT、入口 QPS 、CPU使用率和线程数五个维度监控应用数据，让系统尽可能跑在最大吞吐量的同时保证系统整体的稳定性。&lt;/p&gt;
+&lt;p&gt;系统保护规则是应用整体维度的，而不是资源维度的，并且仅对入口流量 (进入应用的流量) 生效。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Load（仅对 Linux/Unix-like 机器生效）：当系统 load1 超过阈值，且系统当前的并发线程数超过系统容量时才会触发系统保护。系统容量由系统的 maxQps * minRt 计算得出。设定参考值一般是 CPU cores * 2.5。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;RT：当单台机器上所有入口流量的平均 RT 达到阈值即触发系统保护，单位是毫秒。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;线程数：当单台机器上所有入口流量的并发线程数达到阈值即触发系统保护。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;入口 QPS：当单台机器上所有入口流量的 QPS 达到阈值即触发系统保护。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CPU使用率：当单台机器上所有入口流量的 CPU使用率达到阈值即触发系统保护。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;拓展-自定义异常返回&#34;&gt;&lt;a href=&#34;#拓展-自定义异常返回&#34; class=&#34;headerlink&#34; title=&#34;拓展-自定义异常返回&#34;&gt;&lt;/a&gt;拓展-自定义异常返回&lt;/h3&gt;&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Component&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;SentinelExceptionHandler&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;BlockExceptionHandler&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * BlockException 异常接口,包含Sentinel的五个异常&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * FlowException          限流异常&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * DegradeException       降级异常&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * ParamFlowException     参数限流异常&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * AuthorityException     授权异常&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * SystemBlockException   系统负载异常&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;handle&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(HttpServletRequest request, HttpServletResponse response, BlockException e)&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;throws&lt;/span&gt; Exception &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        response.setContentType(&lt;span class=&#34;string&#34;&gt;&amp;quot;application/json;charset=utf-8&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        ResponseData responseData = &lt;span class=&#34;keyword&#34;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (e &lt;span class=&#34;keyword&#34;&gt;instanceof&lt;/span&gt; FlowException) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            responseData = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; ResponseData(&lt;span class=&#34;number&#34;&gt;4001&lt;/span&gt;, &lt;span class=&#34;string&#34;&gt;&amp;quot;接口被限流！&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125; &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (e &lt;span class=&#34;keyword&#34;&gt;instanceof&lt;/span&gt; DegradeException) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            responseData = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; ResponseData(&lt;span class=&#34;number&#34;&gt;4002&lt;/span&gt;, &lt;span class=&#34;string&#34;&gt;&amp;quot;接口被降级！&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125; &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (e &lt;span class=&#34;keyword&#34;&gt;instanceof&lt;/span&gt; ParamFlowException) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            responseData = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; ResponseData(&lt;span class=&#34;number&#34;&gt;4003&lt;/span&gt;, &lt;span class=&#34;string&#34;&gt;&amp;quot;接口参数被限流！&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125; &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (e &lt;span class=&#34;keyword&#34;&gt;instanceof&lt;/span&gt; AuthorityException) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            responseData = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; ResponseData(&lt;span class=&#34;number&#34;&gt;4004&lt;/span&gt;, &lt;span class=&#34;string&#34;&gt;&amp;quot;接口授权异常！&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125; &lt;span class=&#34;keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; (e &lt;span class=&#34;keyword&#34;&gt;instanceof&lt;/span&gt; SystemBlockException) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            responseData = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; ResponseData(&lt;span class=&#34;number&#34;&gt;4005&lt;/span&gt;, &lt;span class=&#34;string&#34;&gt;&amp;quot;系统负载异常！&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        response.getWriter().write(JSONObject.toJSONString(responseData));&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * 返回类定义&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@Data&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@AllArgsConstructor&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@NoArgsConstructor&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;ResponseData&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; code;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;private&lt;/span&gt; String message;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/05/gbKIefCR5xQZNTW.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
 </content>
         <category term="Spring Cloud" />
-        <updated>2021-07-15T13:10:32.254Z</updated>
+        <updated>2021-07-18T13:53:36.834Z</updated>
     </entry>
     <entry>
         <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Spring/Spring-Cloud-Alibaba(2)-%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/</id>
