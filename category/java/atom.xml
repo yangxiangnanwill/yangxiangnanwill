@@ -6,33 +6,33 @@
     <updated>2021-07-12T14:58:41.211Z</updated>
     <category term="Docker" />
     <category term="Archery" />
+    <category term="Linux" />
+    <category term="Cron" />
     <category term="JAVA" />
     <category term="POI" />
     <category term="EXCEL" />
-    <category term="Linux" />
-    <category term="Cron" />
-    <category term="Spring Cloud" />
     <category term="BeetlSql" />
     <category term="Git" />
     <category term="Other" />
     <category term="ProtoBuffer" />
+    <category term="随笔" />
+    <category term="Spring Cloud" />
     <category term="IDEA" />
     <category term="Stream" />
     <category term="Debug" />
-    <category term="随笔" />
+    <category term="JAVA工具类整理" />
     <category term="Poi" />
     <category term="EasyExcel" />
     <category term="Excel" />
     <category term="测试" />
     <category term="Typora" />
-    <category term="JAVA工具类整理" />
+    <category term="IDEA常用功能整理" />
     <category term="MyBatis" />
     <category term="SpringBoot" />
     <category term="爬虫" />
     <category term="Quartz" />
     <category term="Jsoup" />
     <category term="Http" />
-    <category term="IDEA常用功能整理" />
     <entry>
         <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Java/JAVA_%E6%B5%85%E6%9E%90%E6%9E%9A%E4%B8%BE/</id>
         <title>浅析枚举</title>
