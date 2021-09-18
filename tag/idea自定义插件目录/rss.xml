@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Will • Posts by &#34;idea自定义插件目录&#34; tag</title>
+        <link>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io</link>
+        <description>愿你一生努力，一生被爱</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 18 Sep 2021 22:19:13 +0800</pubDate>
+        <lastBuildDate>Sat, 18 Sep 2021 22:19:13 +0800</lastBuildDate>
+        <category>Docker</category>
+        <category>Archery</category>
+        <category>JAVA</category>
+        <category>POI</category>
+        <category>EXCEL</category>
+        <category>BeetlSql</category>
+        <category>Git</category>
+        <category>Other</category>
+        <category>Linux</category>
+        <category>Cron</category>
+        <category>ProtoBuffer</category>
+        <category>随笔</category>
+        <category>Spring Cloud</category>
+        <category>IDEA</category>
+        <category>Stream</category>
+        <category>Debug</category>
+        <category>JAVA工具类整理</category>
+        <category>IDEA自定义插件目录</category>
+        <category>Poi</category>
+        <category>EasyExcel</category>
+        <category>Excel</category>
+        <category>测试</category>
+        <category>Typora</category>
+        <category>IDEA常用功能整理</category>
+        <category>MyBatis</category>
+        <category>SpringBoot</category>
+        <category>爬虫</category>
+        <category>Quartz</category>
+        <category>Jsoup</category>
+        <category>Http</category>
+        <item>
+            <guid isPermalink="true">https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/09/18/Tool/IDEA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%AE%E5%BD%95/</guid>
+            <title>IDEA自定义插件目录</title>
+            <link>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/09/18/Tool/IDEA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%AE%E5%BD%95/</link>
+            <category>IDEA自定义插件目录</category>
+            <pubDate>Sat, 18 Sep 2021 22:19:13 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;自定义IntelliJ-IDEA配置和插件的存放目录&#34;&gt;&lt;a href=&#34;#自定义IntelliJ-IDEA配置和插件的存放目录&#34; class=&#34;headerlink&#34; title=&#34;自定义IntelliJ IDEA配置和插件的存放目录&#34;&gt;&lt;/a&gt;自定义IntelliJ IDEA配置和插件的存放目录&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;因为个人电脑配置和个人习惯，不太习惯把配置相关的放到C盘，所以本次特地记录一下IDEA的配置和插件目录的自定义&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;下载安装IDEA&lt;/li&gt;
+&lt;li&gt;关闭IDEA&lt;/li&gt;
+&lt;li&gt;进入IDEA的安装目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;举个栗子：&lt;/p&gt;
+&lt;p&gt;本人安装目录：&lt;code&gt;D:\Program Files\IntelliJ IDEA 2021.2.1\bin\&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;打开&lt;code&gt;idea.properties&lt;/code&gt;文件&lt;/li&gt;
+&lt;li&gt;修改配置存储路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight properties&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#---------------------------------------------------------------------&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# Uncomment this option if you want to customize a path to the settings directory.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#---------------------------------------------------------------------&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# idea.config.path=$&amp;#123;user.home&amp;#125;/.IntelliJIdea/config&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;把上方注释的&lt;code&gt;# idea.config.path=$&amp;#123;user.home&amp;#125;/.IntelliJIdea/config&lt;/code&gt;复制一行&lt;/li&gt;
+&lt;li&gt;放开注释&lt;/li&gt;
+&lt;li&gt;更改成你自己配置的文件路径就行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;==个人建议就是：按照原有配置方式，定义个全局的环境变量，后续只需配置环境变量即可==&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;修改插件配置路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight properties&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#---------------------------------------------------------------------&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# Uncomment this option if you want to customize a path to the caches directory.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#---------------------------------------------------------------------&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# idea.system.path=$&amp;#123;user.home&amp;#125;/.IntelliJIdea/system&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;把上方注释的&lt;code&gt;# idea.system.path=$&amp;#123;user.home&amp;#125;/.IntelliJIdea/system&lt;/code&gt;复制一行&lt;/li&gt;
+&lt;li&gt;放开注释&lt;/li&gt;
+&lt;li&gt;更改成你自己配置的文件路径就行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;==个人建议就是：按照原有配置方式，定义个全局的环境变量，后续只需配置环境变量即可==&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;保存后，再次运行idea，所有配置和插件都将保存在指定的目录；&lt;/li&gt;
+&lt;li&gt;后续再次重装系统或者重装idea只需要更改这个配置就行，相关配置还在，岂不美滋滋。&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
