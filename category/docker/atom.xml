@@ -9,25 +9,25 @@
     <category term="JAVA" />
     <category term="POI" />
     <category term="EXCEL" />
-    <category term="BeetlSql" />
-    <category term="Git" />
-    <category term="Other" />
     <category term="Linux" />
     <category term="Cron" />
-    <category term="ProtoBuffer" />
-    <category term="随笔" />
     <category term="Spring Cloud" />
     <category term="IDEA" />
     <category term="Stream" />
     <category term="Debug" />
     <category term="JAVA工具类整理" />
+    <category term="BeetlSql" />
     <category term="IDEA自定义插件目录" />
+    <category term="Git" />
+    <category term="Other" />
+    <category term="ProtoBuffer" />
+    <category term="随笔" />
+    <category term="IDEA常用功能整理" />
     <category term="Poi" />
     <category term="EasyExcel" />
     <category term="Excel" />
-    <category term="测试" />
     <category term="Typora" />
-    <category term="IDEA常用功能整理" />
+    <category term="测试" />
     <category term="MyBatis" />
     <category term="SpringBoot" />
     <category term="爬虫" />
@@ -909,6 +909,127 @@
         <updated>2021-07-12T14:58:41.206Z</updated>
     </entry>
     <entry>
+        <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(1)-%E5%88%9D%E8%AF%86Docker/</id>
+        <title>Docker(1)-初识Docker</title>
+        <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(1)-%E5%88%9D%E8%AF%86Docker/"/>
+        <content type="html">&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;本人文章均引用或者复制：&lt;/p&gt;
+&lt;p&gt;公众号：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.cicoding.cn/icons/wx.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;QQ群：&lt;a href=&#34;http://shang.qq.com/wpa/qunwpa?idkey=85cfa5c4c8fbe9859b7166a33d84c32f2def325c4d29f35f299a5756a955ab21&#34;&gt;806951874&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;Docker的前世今生&#34;&gt;&lt;a href=&#34;#Docker的前世今生&#34; class=&#34;headerlink&#34; title=&#34;Docker的前世今生&#34;&gt;&lt;/a&gt;Docker的前世今生&lt;/h1&gt;&lt;h2 id=&#34;传统项目开发部署的流程是怎样的？&#34;&gt;&lt;a href=&#34;#传统项目开发部署的流程是怎样的？&#34; class=&#34;headerlink&#34; title=&#34;传统项目开发部署的流程是怎样的？&#34;&gt;&lt;/a&gt;传统项目开发部署的流程是怎样的？&lt;/h2&gt;&lt;h3 id=&#34;传统项目开发部署的基本流程&#34;&gt;&lt;a href=&#34;#传统项目开发部署的基本流程&#34; class=&#34;headerlink&#34; title=&#34;传统项目开发部署的基本流程&#34;&gt;&lt;/a&gt;传统项目开发部署的基本流程&lt;/h3&gt;&lt;p&gt;这里只简单描述一下，项目发布的基本流程&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本地开发+测试，没有问题的话，编译打包发布到测试环境&lt;/li&gt;
+&lt;li&gt;在测试环境中进行测试，测试完成后，发布到生产环境&lt;/li&gt;
+&lt;li&gt;在生产环境中进行最后的测试，如果没有问题，那么一切就OK了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;存在什么问题？&#34;&gt;&lt;a href=&#34;#存在什么问题？&#34; class=&#34;headerlink&#34; title=&#34;存在什么问题？&#34;&gt;&lt;/a&gt;存在什么问题？&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;存在问题：不同机器上的软件环境不一致。（比较核心的问题)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;软件环境的配置繁多、命令记不清楚。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重复性搭建软件环境、效率低下。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;对照传统虚拟机总结&#34;&gt;&lt;a href=&#34;#对照传统虚拟机总结&#34; class=&#34;headerlink&#34; title=&#34;对照传统虚拟机总结&#34;&gt;&lt;/a&gt;对照传统虚拟机总结&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;特性&lt;/th&gt;
+&lt;th&gt;容器&lt;/th&gt;
+&lt;th&gt;虚拟机&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;启动&lt;/td&gt;
+&lt;td&gt;秒级&lt;/td&gt;
+&lt;td&gt;分钟级&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;硬盘使用&lt;/td&gt;
+&lt;td&gt;一般为MB&lt;/td&gt;
+&lt;td&gt;一般为GB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;性能&lt;/td&gt;
+&lt;td&gt;接近原生&lt;/td&gt;
+&lt;td&gt;弱于&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;系统支持量&lt;/td&gt;
+&lt;td&gt;单机支持上千个容器&lt;/td&gt;
+&lt;td&gt;一般几十个&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h1 id=&#34;Docker是干什么用的？&#34;&gt;&lt;a href=&#34;#Docker是干什么用的？&#34; class=&#34;headerlink&#34; title=&#34;Docker是干什么用的？&#34;&gt;&lt;/a&gt;Docker是干什么用的？&lt;/h1&gt;&lt;h2 id=&#34;Docker解决的问题&#34;&gt;&lt;a href=&#34;#Docker解决的问题&#34; class=&#34;headerlink&#34; title=&#34;Docker解决的问题&#34;&gt;&lt;/a&gt;Docker解决的问题&lt;/h2&gt;&lt;p&gt;由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。&lt;br&gt;Docker 主要解决环境配置问题，它是一种虚拟化技术，对进程进行隔离，被隔离的进程独立于宿主操作系统和其它隔离的进程。使用 Docker 可以不修改应用程序代码，不需要开发人员学习特定环境下的技术，就能够将现有的应用程序部署在其它机器上。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2520176274,3530821872&amp;fm=26&amp;gp=0.jpg&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;与虚拟机的比较&#34;&gt;&lt;a href=&#34;#与虚拟机的比较&#34; class=&#34;headerlink&#34; title=&#34;与虚拟机的比较&#34;&gt;&lt;/a&gt;与虚拟机的比较&lt;/h2&gt;&lt;p&gt;虚拟机也是一种虚拟化技术，它与 Docker 最大的区别在于它是通过模拟硬件，并在硬件上安装操作系统来实现。&lt;/p&gt;
+&lt;p&gt;so&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;==&lt;strong&gt;Docker不是虚拟机&lt;/strong&gt;==&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对Docker的感受：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;比如公司买了一台新服务器，系统是centos，你要想把项目部署到服务器上，而且项目中使用到了mysql、redis、activemq、zookeeper等技术，要想项目能在服务器上正常运行，必须在新的服务器上搭建好mysql、redis、activemq、zookeeper服务环境。这样的话，在环境搭建和配置上就要花费太多的时间了（因为需要配置很多的配置文件、需要手动启动服务等）。&lt;/p&gt;
+&lt;p&gt;又或者每次重装一次系统或者换一个机器，你就要把环境重装一次，东西越多花费的时间越多、很麻烦、浪费时间和精力。&lt;/p&gt;
+&lt;p&gt;而使用Docker的话，你只需要一条命令，你就可以在你的centos系统上运行你需要的软件，比如mysql、tomcat、jdk、redis等。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;举个栗子&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;【示例1】：Docker上安装mysql&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你需要MySQL服务，那么在docker中通过简单的命令就可以安装一个MySQL数据库服务：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker pull mysql&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;启动mysql命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker run -d -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 mysql&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;很简单吧，一个mysql服务就启动完成了，就可以正常使用了。可以通过mysql客户端（Navicat、DataGrip等）连接这个mysql数据库。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;【示例2】：Docker上安装jdk&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你需要JDK环境，那么在Docker中通过简单的命令安装一个JDK的镜像， 然后通过一条命令启动这个容器就行了，容器会自动给你安装配置好JDK环境。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker pull java&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;就这么简单的一条命令，JDK就安装好了。你可以在Docker容器的命令行中通过java -version来检测jdk是否安装成功。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;镜像、容器&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;对于新手而言，或许有点不明白镜像和容器分别是个什么东东，还是有点不明白。&lt;/p&gt;
+&lt;p&gt;你可以这样感官的理解：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;镜像 —— 相当于ISO操作系统的安装包，ISO镜像的内容是固定的，不会发生改变，可以重复使用。&lt;/p&gt;
+&lt;p&gt;容器 —— 类似于使用 ISO镜像安装的新的操作系统，可以使用一个相同的ISO镜像，安装很多操作系统。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Docker占用的资源很小。启动一个容器一般都是秒级的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;Docker镜像、容器、仓库的介绍&#34;&gt;&lt;a href=&#34;#Docker镜像、容器、仓库的介绍&#34; class=&#34;headerlink&#34; title=&#34;Docker镜像、容器、仓库的介绍&#34;&gt;&lt;/a&gt;Docker镜像、容器、仓库的介绍&lt;/h1&gt;&lt;h2 id=&#34;Docker镜像&#34;&gt;&lt;a href=&#34;#Docker镜像&#34; class=&#34;headerlink&#34; title=&#34;Docker镜像&#34;&gt;&lt;/a&gt;Docker镜像&lt;/h2&gt;&lt;p&gt;通俗的理解镜像&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Docker的镜像是一个只读的模板，一个独立的文件系统，包括运行容器所需的数据，可以用来创建新的容器。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Docker的镜像相当于ISO操作系统的安装包，ISO镜像的内容是固定的，不会发生改变，可以重复使用。&lt;/p&gt;
+&lt;p&gt;如果上面的形容还无法让你理解Docker镜像，那我再举一个例子：&lt;/p&gt;
+&lt;p&gt;从事Java开发的人都知道类和实例的关系。直观的感觉，类就像是一个模板，根据这个类模板，可以生成很多个具体的对象实例。&lt;/p&gt;
+&lt;p&gt;则，&lt;strong&gt;Docker镜像就相当于Java的类，而通过Docker镜像生成出来的东西，我们就叫他它“容器”&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;通过上面的形容，应该可以感觉的到镜像和容器之间的关系了吧。&lt;/p&gt;
+&lt;h2 id=&#34;Docker容器&#34;&gt;&lt;a href=&#34;#Docker容器&#34; class=&#34;headerlink&#34; title=&#34;Docker容器&#34;&gt;&lt;/a&gt;Docker容器&lt;/h2&gt;&lt;p&gt;通俗的理解容器&lt;/p&gt;
+&lt;p&gt;在上一节已经介绍了镜像与容器的关系。&lt;/p&gt;
+&lt;p&gt;这里就直接copy文档中的一句话，来简单形容一下容器：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Docker镜像就相当于Java的类，而通过Docker镜像生成出来的东西，我们就叫他它“容器”&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;Docker仓库&#34;&gt;&lt;a href=&#34;#Docker仓库&#34; class=&#34;headerlink&#34; title=&#34;Docker仓库&#34;&gt;&lt;/a&gt;Docker仓库&lt;/h2&gt;&lt;p&gt;通俗的理解Docker仓库&lt;/p&gt;
+&lt;p&gt;仓库支持的操作类似git，当用户创建了自己的镜像之后就可以使用 push 命令将它上传到公有或者私有仓库，这样下次在另外一台机器上使用这个镜像时候，只需要从仓库上 pull 下来就可以了。&lt;/p&gt;
+&lt;p&gt;类似于，将某项目模块打成jar包，然后上传到私有或者公有的maven仓库，然后在其他的所有支持maven环境的机器上，都可以拉取这个jar进行使用。&lt;/p&gt;
+</content>
+        <category term="Docker" />
+        <updated>2021-07-12T14:58:41.205Z</updated>
+    </entry>
+    <entry>
         <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(2)-CentOS%E5%AE%89%E8%A3%85/</id>
         <title>Docker(2)-CentOS安装</title>
         <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(2)-CentOS%E5%AE%89%E8%A3%85/"/>
@@ -1086,127 +1207,6 @@
 &lt;p&gt;这样执行完了就完成安装了，简单便捷&lt;/p&gt;
 &lt;p&gt;然后启动docker&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl start docker&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-        <category term="Docker" />
-        <updated>2021-07-12T14:58:41.205Z</updated>
-    </entry>
-    <entry>
-        <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(1)-%E5%88%9D%E8%AF%86Docker/</id>
-        <title>Docker(1)-初识Docker</title>
-        <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(1)-%E5%88%9D%E8%AF%86Docker/"/>
-        <content type="html">&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;本人文章均引用或者复制：&lt;/p&gt;
-&lt;p&gt;公众号：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://www.cicoding.cn/icons/wx.jpg&#34;&gt;&lt;/p&gt;
-&lt;p&gt;QQ群：&lt;a href=&#34;http://shang.qq.com/wpa/qunwpa?idkey=85cfa5c4c8fbe9859b7166a33d84c32f2def325c4d29f35f299a5756a955ab21&#34;&gt;806951874&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;Docker的前世今生&#34;&gt;&lt;a href=&#34;#Docker的前世今生&#34; class=&#34;headerlink&#34; title=&#34;Docker的前世今生&#34;&gt;&lt;/a&gt;Docker的前世今生&lt;/h1&gt;&lt;h2 id=&#34;传统项目开发部署的流程是怎样的？&#34;&gt;&lt;a href=&#34;#传统项目开发部署的流程是怎样的？&#34; class=&#34;headerlink&#34; title=&#34;传统项目开发部署的流程是怎样的？&#34;&gt;&lt;/a&gt;传统项目开发部署的流程是怎样的？&lt;/h2&gt;&lt;h3 id=&#34;传统项目开发部署的基本流程&#34;&gt;&lt;a href=&#34;#传统项目开发部署的基本流程&#34; class=&#34;headerlink&#34; title=&#34;传统项目开发部署的基本流程&#34;&gt;&lt;/a&gt;传统项目开发部署的基本流程&lt;/h3&gt;&lt;p&gt;这里只简单描述一下，项目发布的基本流程&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;本地开发+测试，没有问题的话，编译打包发布到测试环境&lt;/li&gt;
-&lt;li&gt;在测试环境中进行测试，测试完成后，发布到生产环境&lt;/li&gt;
-&lt;li&gt;在生产环境中进行最后的测试，如果没有问题，那么一切就OK了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;存在什么问题？&#34;&gt;&lt;a href=&#34;#存在什么问题？&#34; class=&#34;headerlink&#34; title=&#34;存在什么问题？&#34;&gt;&lt;/a&gt;存在什么问题？&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;存在问题：不同机器上的软件环境不一致。（比较核心的问题)&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;软件环境的配置繁多、命令记不清楚。&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;重复性搭建软件环境、效率低下。&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;对照传统虚拟机总结&#34;&gt;&lt;a href=&#34;#对照传统虚拟机总结&#34; class=&#34;headerlink&#34; title=&#34;对照传统虚拟机总结&#34;&gt;&lt;/a&gt;对照传统虚拟机总结&lt;/h2&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;特性&lt;/th&gt;
-&lt;th&gt;容器&lt;/th&gt;
-&lt;th&gt;虚拟机&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;启动&lt;/td&gt;
-&lt;td&gt;秒级&lt;/td&gt;
-&lt;td&gt;分钟级&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;硬盘使用&lt;/td&gt;
-&lt;td&gt;一般为MB&lt;/td&gt;
-&lt;td&gt;一般为GB&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;性能&lt;/td&gt;
-&lt;td&gt;接近原生&lt;/td&gt;
-&lt;td&gt;弱于&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;系统支持量&lt;/td&gt;
-&lt;td&gt;单机支持上千个容器&lt;/td&gt;
-&lt;td&gt;一般几十个&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;h1 id=&#34;Docker是干什么用的？&#34;&gt;&lt;a href=&#34;#Docker是干什么用的？&#34; class=&#34;headerlink&#34; title=&#34;Docker是干什么用的？&#34;&gt;&lt;/a&gt;Docker是干什么用的？&lt;/h1&gt;&lt;h2 id=&#34;Docker解决的问题&#34;&gt;&lt;a href=&#34;#Docker解决的问题&#34; class=&#34;headerlink&#34; title=&#34;Docker解决的问题&#34;&gt;&lt;/a&gt;Docker解决的问题&lt;/h2&gt;&lt;p&gt;由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。&lt;br&gt;Docker 主要解决环境配置问题，它是一种虚拟化技术，对进程进行隔离，被隔离的进程独立于宿主操作系统和其它隔离的进程。使用 Docker 可以不修改应用程序代码，不需要开发人员学习特定环境下的技术，就能够将现有的应用程序部署在其它机器上。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2520176274,3530821872&amp;fm=26&amp;gp=0.jpg&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;与虚拟机的比较&#34;&gt;&lt;a href=&#34;#与虚拟机的比较&#34; class=&#34;headerlink&#34; title=&#34;与虚拟机的比较&#34;&gt;&lt;/a&gt;与虚拟机的比较&lt;/h2&gt;&lt;p&gt;虚拟机也是一种虚拟化技术，它与 Docker 最大的区别在于它是通过模拟硬件，并在硬件上安装操作系统来实现。&lt;/p&gt;
-&lt;p&gt;so&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;==&lt;strong&gt;Docker不是虚拟机&lt;/strong&gt;==&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;对Docker的感受：&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;比如公司买了一台新服务器，系统是centos，你要想把项目部署到服务器上，而且项目中使用到了mysql、redis、activemq、zookeeper等技术，要想项目能在服务器上正常运行，必须在新的服务器上搭建好mysql、redis、activemq、zookeeper服务环境。这样的话，在环境搭建和配置上就要花费太多的时间了（因为需要配置很多的配置文件、需要手动启动服务等）。&lt;/p&gt;
-&lt;p&gt;又或者每次重装一次系统或者换一个机器，你就要把环境重装一次，东西越多花费的时间越多、很麻烦、浪费时间和精力。&lt;/p&gt;
-&lt;p&gt;而使用Docker的话，你只需要一条命令，你就可以在你的centos系统上运行你需要的软件，比如mysql、tomcat、jdk、redis等。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;举个栗子&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;【示例1】：Docker上安装mysql&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;你需要MySQL服务，那么在docker中通过简单的命令就可以安装一个MySQL数据库服务：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker pull mysql&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-&lt;li&gt;启动mysql命令&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker run -d -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 mysql&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;很简单吧，一个mysql服务就启动完成了，就可以正常使用了。可以通过mysql客户端（Navicat、DataGrip等）连接这个mysql数据库。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;【示例2】：Docker上安装jdk&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;你需要JDK环境，那么在Docker中通过简单的命令安装一个JDK的镜像， 然后通过一条命令启动这个容器就行了，容器会自动给你安装配置好JDK环境。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker pull java&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;就这么简单的一条命令，JDK就安装好了。你可以在Docker容器的命令行中通过java -version来检测jdk是否安装成功。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;镜像、容器&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;对于新手而言，或许有点不明白镜像和容器分别是个什么东东，还是有点不明白。&lt;/p&gt;
-&lt;p&gt;你可以这样感官的理解：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;镜像 —— 相当于ISO操作系统的安装包，ISO镜像的内容是固定的，不会发生改变，可以重复使用。&lt;/p&gt;
-&lt;p&gt;容器 —— 类似于使用 ISO镜像安装的新的操作系统，可以使用一个相同的ISO镜像，安装很多操作系统。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Docker占用的资源很小。启动一个容器一般都是秒级的。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;Docker镜像、容器、仓库的介绍&#34;&gt;&lt;a href=&#34;#Docker镜像、容器、仓库的介绍&#34; class=&#34;headerlink&#34; title=&#34;Docker镜像、容器、仓库的介绍&#34;&gt;&lt;/a&gt;Docker镜像、容器、仓库的介绍&lt;/h1&gt;&lt;h2 id=&#34;Docker镜像&#34;&gt;&lt;a href=&#34;#Docker镜像&#34; class=&#34;headerlink&#34; title=&#34;Docker镜像&#34;&gt;&lt;/a&gt;Docker镜像&lt;/h2&gt;&lt;p&gt;通俗的理解镜像&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Docker的镜像是一个只读的模板，一个独立的文件系统，包括运行容器所需的数据，可以用来创建新的容器。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Docker的镜像相当于ISO操作系统的安装包，ISO镜像的内容是固定的，不会发生改变，可以重复使用。&lt;/p&gt;
-&lt;p&gt;如果上面的形容还无法让你理解Docker镜像，那我再举一个例子：&lt;/p&gt;
-&lt;p&gt;从事Java开发的人都知道类和实例的关系。直观的感觉，类就像是一个模板，根据这个类模板，可以生成很多个具体的对象实例。&lt;/p&gt;
-&lt;p&gt;则，&lt;strong&gt;Docker镜像就相当于Java的类，而通过Docker镜像生成出来的东西，我们就叫他它“容器”&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;通过上面的形容，应该可以感觉的到镜像和容器之间的关系了吧。&lt;/p&gt;
-&lt;h2 id=&#34;Docker容器&#34;&gt;&lt;a href=&#34;#Docker容器&#34; class=&#34;headerlink&#34; title=&#34;Docker容器&#34;&gt;&lt;/a&gt;Docker容器&lt;/h2&gt;&lt;p&gt;通俗的理解容器&lt;/p&gt;
-&lt;p&gt;在上一节已经介绍了镜像与容器的关系。&lt;/p&gt;
-&lt;p&gt;这里就直接copy文档中的一句话，来简单形容一下容器：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Docker镜像就相当于Java的类，而通过Docker镜像生成出来的东西，我们就叫他它“容器”&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;Docker仓库&#34;&gt;&lt;a href=&#34;#Docker仓库&#34; class=&#34;headerlink&#34; title=&#34;Docker仓库&#34;&gt;&lt;/a&gt;Docker仓库&lt;/h2&gt;&lt;p&gt;通俗的理解Docker仓库&lt;/p&gt;
-&lt;p&gt;仓库支持的操作类似git，当用户创建了自己的镜像之后就可以使用 push 命令将它上传到公有或者私有仓库，这样下次在另外一台机器上使用这个镜像时候，只需要从仓库上 pull 下来就可以了。&lt;/p&gt;
-&lt;p&gt;类似于，将某项目模块打成jar包，然后上传到私有或者公有的maven仓库，然后在其他的所有支持maven环境的机器上，都可以拉取这个jar进行使用。&lt;/p&gt;
 </content>
         <category term="Docker" />
         <updated>2021-07-12T14:58:41.205Z</updated>

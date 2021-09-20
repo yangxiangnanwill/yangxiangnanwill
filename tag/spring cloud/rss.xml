@@ -5,38 +5,179 @@
         <link>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io</link>
         <description>愿你一生努力，一生被爱</description>
         <language>zh-CN</language>
-        <pubDate>Sun, 18 Jul 2021 21:53:36 +0800</pubDate>
-        <lastBuildDate>Sun, 18 Jul 2021 21:53:36 +0800</lastBuildDate>
+        <pubDate>Sun, 19 Sep 2021 08:01:34 +0800</pubDate>
+        <lastBuildDate>Sun, 19 Sep 2021 08:01:34 +0800</lastBuildDate>
         <category>Docker</category>
         <category>Archery</category>
         <category>JAVA</category>
         <category>POI</category>
         <category>EXCEL</category>
-        <category>BeetlSql</category>
-        <category>Git</category>
-        <category>Other</category>
         <category>Linux</category>
         <category>Cron</category>
-        <category>ProtoBuffer</category>
-        <category>随笔</category>
         <category>Spring Cloud</category>
         <category>IDEA</category>
         <category>Stream</category>
         <category>Debug</category>
         <category>JAVA工具类整理</category>
+        <category>BeetlSql</category>
         <category>IDEA自定义插件目录</category>
+        <category>Git</category>
+        <category>Other</category>
+        <category>ProtoBuffer</category>
+        <category>随笔</category>
+        <category>IDEA常用功能整理</category>
         <category>Poi</category>
         <category>EasyExcel</category>
         <category>Excel</category>
-        <category>测试</category>
         <category>Typora</category>
-        <category>IDEA常用功能整理</category>
+        <category>测试</category>
         <category>MyBatis</category>
         <category>SpringBoot</category>
         <category>爬虫</category>
         <category>Quartz</category>
         <category>Jsoup</category>
         <category>Http</category>
+        <item>
+            <guid isPermalink="true">https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/09/19/Spring/Spring-Cloud-Alibaba(5)-%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3/</guid>
+            <title>Spring Cloud Alibaba(5)-服务网关</title>
+            <link>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/09/19/Spring/Spring-Cloud-Alibaba(5)-%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3/</link>
+            <category>Spring Cloud</category>
+            <pubDate>Sun, 19 Sep 2021 08:01:34 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;网关简介&#34;&gt;&lt;a href=&#34;#网关简介&#34; class=&#34;headerlink&#34; title=&#34;网关简介&#34;&gt;&lt;/a&gt;网关简介&lt;/h1&gt;&lt;p&gt;大家都都知道在微服务架构中，一个系统会被拆分为很多个微服务。那么作为客户端要如何去调用这么多的微服务呢？如果没有网关的存在，我们只能在客户端记录每个微服务的地址，然后分别去调用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/7jYrw2bhAay6N9u.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这样的架构，会存在着诸多的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;客户端多次请求不同的微服务，增加客户端代码或配置编写的复杂性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;认证复杂，每个服务都需要独立认证。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;存在跨域请求，在一定场景下处理相对复杂。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;上面的这些问题可以借助&lt;strong&gt;API****网关&lt;/strong&gt;来解决。&lt;/p&gt;
+&lt;p&gt;所谓的API网关，就是指系统的&lt;strong&gt;统一入口&lt;/strong&gt;，它封装了应用程序的内部结构，为客户端提供统一服务，一些与业务本身功能无关的公共逻辑可以在这里实现，诸如认证、鉴权、监控、路由转发等等。&lt;/p&gt;
+&lt;p&gt;添加上API网关之后，系统的架构图变成了如下所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/is1e54KcNrktqMZ.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我们也可以观察下，我们现在的整体架构图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/EMeVtuJa9KjNdLp.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在业界比较流行的网关，有下面这些：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ngnix+lua&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用nginx的反向代理和负载均衡可实现对api服务器的负载均衡及高可用lua是一种脚本语言,可以来编写一些简单的逻辑, nginx支持lua脚本&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Kong&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于Nginx+Lua开发，性能高，稳定，有多个可用的插件(限流、鉴权等等)可以开箱即用。 问题：只支持Http协议；二次开发，自由扩展困难；提供管理API，缺乏更易用的管控、配置方式。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Zuul&lt;/strong&gt; &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Netflflix开源的网关，功能丰富，使用JAVA开发，易于二次开发 问题：缺乏管控，无法动态配置；依赖组件较多；处理Http请求依赖的是Web容器，性能不如Nginx&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Spring Cloud Gateway&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Spring公司为了替换Zuul而开发的网关服务，将在下面具体介绍。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意：SpringCloud alibaba技术栈中并没有提供自己的网关，我们可以采用Spring Cloud Gateway来做网关&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;Gateway简介&#34;&gt;&lt;a href=&#34;#Gateway简介&#34; class=&#34;headerlink&#34; title=&#34;Gateway简介&#34;&gt;&lt;/a&gt;Gateway简介&lt;/h1&gt;&lt;p&gt;Spring Cloud Gateway是Spring公司基于Spring 5.0，Spring Boot 2.0 和 Project Reactor 等技术开发的网关，它旨在为微服务架构提供一种简单有效的统一的 API 路由管理方式。它的目标是替代Netflflix Zuul，其不仅提供统一的路由方式，并且基于 Filter 链的方式提供了网关基本的功能，例如：安全，监控和限流。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;性能强劲：是第一代网关Zuul的1.6倍&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;功能强大：内置了很多实用的功能，例如转发、监控、限流等&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设计优雅，容易扩展&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;其实现依赖Netty与WebFlux，不是传统的Servlet编程模型，学习成本高&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;不能将其部署在Tomcat、Jetty等Servlet容器里，只能打成jar包执行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;需要Spring Boot 2.0及以上的版本，才支持&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;Gateway快速入门&#34;&gt;&lt;a href=&#34;#Gateway快速入门&#34; class=&#34;headerlink&#34; title=&#34;Gateway快速入门&#34;&gt;&lt;/a&gt;Gateway快速入门&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;要求: 通过浏览器访问api网关,然后通过网关将请求转发到商品微服务&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;基础版&#34;&gt;&lt;a href=&#34;#基础版&#34; class=&#34;headerlink&#34; title=&#34;基础版&#34;&gt;&lt;/a&gt;&lt;strong&gt;基础版&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;创建新模块shop-gateway&#34;&gt;&lt;a href=&#34;#创建新模块shop-gateway&#34; class=&#34;headerlink&#34; title=&#34;创建新模块shop-gateway&#34;&gt;&lt;/a&gt;创建新模块&lt;code&gt;shop-gateway&lt;/code&gt;&lt;/h3&gt;&lt;h3 id=&#34;导入相关网关依赖&#34;&gt;&lt;a href=&#34;#导入相关网关依赖&#34; class=&#34;headerlink&#34; title=&#34;导入相关网关依赖&#34;&gt;&lt;/a&gt;导入相关网关依赖&lt;/h3&gt;&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;dependencies&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;&amp;lt;!--gateway网关--&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.cloud&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-cloud-starter-gateway&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;dependencies&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;创建项目基本包路径com-letcoding-gateway&#34;&gt;&lt;a href=&#34;#创建项目基本包路径com-letcoding-gateway&#34; class=&#34;headerlink&#34; title=&#34;创建项目基本包路径com.letcoding.gateway&#34;&gt;&lt;/a&gt;创建项目基本包路径&lt;code&gt;com.letcoding.gateway&lt;/code&gt;&lt;/h3&gt;&lt;h3 id=&#34;创建shop-gateway模块启动类&#34;&gt;&lt;a href=&#34;#创建shop-gateway模块启动类&#34; class=&#34;headerlink&#34; title=&#34;创建shop-gateway模块启动类&#34;&gt;&lt;/a&gt;创建&lt;code&gt;shop-gateway&lt;/code&gt;模块启动类&lt;/h3&gt;&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;package&lt;/span&gt; com.letcoding.gateway;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; org.springframework.boot.SpringApplication;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; org.springframework.boot.autoconfigure.SpringBootApplication;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * &lt;span class=&#34;doctag&#34;&gt;@ClassName&lt;/span&gt; ShopGatewayApplication&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * &lt;span class=&#34;doctag&#34;&gt;@Description&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * &lt;span class=&#34;doctag&#34;&gt;@Author&lt;/span&gt; will&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * &lt;span class=&#34;doctag&#34;&gt;@Date&lt;/span&gt; 2021/9/19 8:23&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@SpringBootApplication&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;ShopGatewayApplication&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(String[] args)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        SpringApplication.run(ShopGatewayApplication.class, args);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;添加配置文件&#34;&gt;&lt;a href=&#34;#添加配置文件&#34; class=&#34;headerlink&#34; title=&#34;添加配置文件&#34;&gt;&lt;/a&gt;添加配置文件&lt;/h3&gt;&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;server:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;port:&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;7000&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;spring:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;application:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;name:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;shop-gateway&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;cloud:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;gateway:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;comment&#34;&gt;# 路由数组[路由 就是指定当请求满足什么条件的时候转到哪个微服务]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;routes:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;id:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;shop-product&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 当前路由的标识, 要求唯一&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;attr&#34;&gt;uri:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;http://localhost:8081&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 请求要转发到的地址&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;attr&#34;&gt;order:&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 路由的优先级,数字越小级别越高&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;comment&#34;&gt;# 断言(就是路由转发要满足的条件)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;attr&#34;&gt;predicates:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;Path=/shop-product/**&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 当请求路径满足Path指定的规则时,才进行路由转发&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;comment&#34;&gt;# 过滤器,请求在传递过程中可以通过过滤器对其进行一定的修改&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;attr&#34;&gt;filters:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;StripPrefix=1&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 转发之前去掉1层路径&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;启动服务，通过网关访问路径，请求测试&#34;&gt;&lt;a href=&#34;#启动服务，通过网关访问路径，请求测试&#34; class=&#34;headerlink&#34; title=&#34;启动服务，通过网关访问路径，请求测试&#34;&gt;&lt;/a&gt;启动服务，通过网关访问路径，请求测试&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:7000/shop-product/product/info/1&#34;&gt;http://localhost:7000/shop-product/product/info/1&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/sLn7iVPDWmHORjr.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;增强版&#34;&gt;&lt;a href=&#34;#增强版&#34; class=&#34;headerlink&#34; title=&#34;增强版&#34;&gt;&lt;/a&gt;增强版&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;现在在配置文件中写死了转发路径的地址, 前面我们已经分析过地址写死带来的问题, 接下来我们从注册中心获取此地址。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;添加依赖&#34;&gt;&lt;a href=&#34;#添加依赖&#34; class=&#34;headerlink&#34; title=&#34;添加依赖&#34;&gt;&lt;/a&gt;添加依赖&lt;/h3&gt;&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;!--nacos客户端--&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;groupId&amp;gt;com.alibaba.cloud&amp;lt;&amp;#x2F;groupId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;artifactId&amp;gt;spring-cloud-starter-alibaba-nacos-discovery&amp;lt;&amp;#x2F;artifactId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;&amp;#x2F;dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;添加注解，让注册中心能发现&#34;&gt;&lt;a href=&#34;#添加注解，让注册中心能发现&#34; class=&#34;headerlink&#34; title=&#34;添加注解，让注册中心能发现&#34;&gt;&lt;/a&gt;添加注解，让注册中心能发现&lt;/h3&gt;&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;**&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; * @ClassName ShopGatewayApplication&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; * @Description&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; * @Author will&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; * @Date 2021&amp;#x2F;9&amp;#x2F;19 8:23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; *&amp;#x2F;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;@SpringBootApplication&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;@EnableDiscoveryClient&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public class ShopGatewayApplication &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    public static void main(String[] args) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        SpringApplication.run(ShopGatewayApplication.class, args);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;修改配置文件&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;server:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  port: 7000&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;spring:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  application:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    name: shop-gateway&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  cloud:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    nacos:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      discovery:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        server-addr: 192.168.56.120:8848&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        namespace: 6d39b87a-55bb-4497-bec5-79bdd3b9789b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    gateway:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      discovery:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        locator:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          enabled: true&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      # 路由数组[路由 就是指定当请求满足什么条件的时候转到哪个微服务]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      routes:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        - id: shop-product # 当前路由的标识, 要求唯一&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          uri: lib:&amp;#x2F;&amp;#x2F;shop-product # 请求要转发到的地址&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          order: 1 # 路由的优先级,数字越小级别越高&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          # 断言(就是路由转发要满足的条件)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          predicates:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            - Path&amp;#x3D;&amp;#x2F;shop-product&amp;#x2F;** # 当请求路径满足Path指定的规则时,才进行路由转发&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          # 过滤器,请求在传递过程中可以通过过滤器对其进行一定的修改&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          filters:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            - StripPrefix&amp;#x3D;1 # 转发之前去掉1层路径&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;启动测试&#34;&gt;&lt;a href=&#34;#启动测试&#34; class=&#34;headerlink&#34; title=&#34;启动测试&#34;&gt;&lt;/a&gt;启动测试&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;备注：这里说一个博猪开发的微服务开发的习惯：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;启动项目&lt;/li&gt;
+&lt;li&gt;打开对应环境配置的注册发现中心-&lt;code&gt;nacos&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;打开&lt;code&gt;服务管理&lt;/code&gt;-&lt;code&gt;服务配置&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;查看服务是否启动成功&lt;/li&gt;
+&lt;li&gt;查看使用服务是否都在一个服务环境里面，&lt;code&gt;nacos&lt;/code&gt;默认为&lt;code&gt;public&lt;/code&gt;,不用环境服务调试的时候不通的！！！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;访问地址：&lt;a href=&#34;http://localhost:7000/shop-product/product/info/1&#34;&gt;http://localhost:7000/shop-product/product/info/1&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/sLn7iVPDWmHORjr.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;简写版&#34;&gt;&lt;a href=&#34;#简写版&#34; class=&#34;headerlink&#34; title=&#34;简写版&#34;&gt;&lt;/a&gt;简写版&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;有人可能觉得上方配置可能太繁琐了，在开发中流行一句话&lt;code&gt;约定大于配置&lt;/code&gt;，而&lt;code&gt;SpringCloud-gateway&lt;/code&gt;也遵循了这么一个良好的规范，如果对于这一块不太了解的朋友，请先学习一下&lt;code&gt;SpringBoot&lt;/code&gt;，对于&lt;code&gt;去配置化&lt;/code&gt;有个大概的了解，同时对&lt;code&gt;SpringCloud&lt;/code&gt;也有个基础。当然话归正题我还是不太建议这样配置的，当然日常开发中也很少使用到默认的配置，这里只限于练习配置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;修改配置&#34;&gt;&lt;a href=&#34;#修改配置&#34; class=&#34;headerlink&#34; title=&#34;修改配置&#34;&gt;&lt;/a&gt;修改配置&lt;/h3&gt;&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;server:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  port: 7000&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;spring:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  application:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    name: shop-gateway&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  cloud:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    nacos:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      discovery:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        server-addr: 192.168.56.120:8848&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        namespace: 6d39b87a-55bb-4497-bec5-79bdd3b9789b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    gateway:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      discovery:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        locator:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          enabled: true&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;启动测试-1&#34;&gt;&lt;a href=&#34;#启动测试-1&#34; class=&#34;headerlink&#34; title=&#34;启动测试&#34;&gt;&lt;/a&gt;启动测试&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;访问地址：&lt;a href=&#34;http://localhost:7000/shop-product/product/info/1&#34;&gt;http://localhost:7000/shop-product/product/info/1&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/sLn7iVPDWmHORjr.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这时候，就发现只要按照&lt;strong&gt;网关地址/微服务/接口&lt;/strong&gt;的格式去访问，就可以得到成功响应。&lt;/p&gt;
+&lt;p&gt;同时这里也会发现我之前的命名规则和一些开发习惯，这个也会省去很大的功夫，所以我很建议个人再去开发的时候一定要好好设计一下自己的代码编写规范和实现的逻辑思路。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;Gateway核心架构&#34;&gt;&lt;a href=&#34;#Gateway核心架构&#34; class=&#34;headerlink&#34; title=&#34;Gateway核心架构&#34;&gt;&lt;/a&gt;Gateway核心架构&lt;/h1&gt;&lt;h2 id=&#34;基本概念&#34;&gt;&lt;a href=&#34;#基本概念&#34; class=&#34;headerlink&#34; title=&#34;基本概念&#34;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;p&gt;路由(Route) 是 gateway 中最基本的组件之一，表示一个具体的路由信息载体。主要定义了下面的几个信息:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;字段名&lt;/th&gt;
+&lt;th&gt;字段含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;id&lt;/td&gt;
+&lt;td&gt;路由标识符，区别于其他 Route&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;uri&lt;/td&gt;
+&lt;td&gt;路由指向的目的地 uri，即客户端请求最终被转发到的微服务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;order&lt;/td&gt;
+&lt;td&gt;用于多个 Route 之间的排序，数值越小排序越靠前，匹配优先级越高&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;predicate&lt;/td&gt;
+&lt;td&gt;断言的作用是进行条件判断，只有断言都返回真，才会真正的执行路由&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;filter&lt;/td&gt;
+&lt;td&gt;过滤器用于修改请求和响应信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/18/Spring/Spring-Cloud-Alibaba(4)-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99/</guid>
             <title>Spring Cloud Alibaba(4)-服务容错</title>

@@ -3,37 +3,178 @@
     <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io</id>
     <title>Will</title>
     <link href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io" />
-    <updated>2021-09-18T14:19:13.008Z</updated>
+    <updated>2021-09-19T00:01:34.383Z</updated>
     <category term="Docker" />
     <category term="Archery" />
     <category term="JAVA" />
     <category term="POI" />
     <category term="EXCEL" />
-    <category term="BeetlSql" />
-    <category term="Git" />
-    <category term="Other" />
     <category term="Linux" />
     <category term="Cron" />
-    <category term="ProtoBuffer" />
-    <category term="随笔" />
     <category term="Spring Cloud" />
     <category term="IDEA" />
     <category term="Stream" />
     <category term="Debug" />
     <category term="JAVA工具类整理" />
+    <category term="BeetlSql" />
     <category term="IDEA自定义插件目录" />
+    <category term="Git" />
+    <category term="Other" />
+    <category term="ProtoBuffer" />
+    <category term="随笔" />
+    <category term="IDEA常用功能整理" />
     <category term="Poi" />
     <category term="EasyExcel" />
     <category term="Excel" />
-    <category term="测试" />
     <category term="Typora" />
-    <category term="IDEA常用功能整理" />
+    <category term="测试" />
     <category term="MyBatis" />
     <category term="SpringBoot" />
     <category term="爬虫" />
     <category term="Quartz" />
     <category term="Jsoup" />
     <category term="Http" />
+    <entry>
+        <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/09/19/Spring/Spring-Cloud-Alibaba(5)-%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3/</id>
+        <title>Spring Cloud Alibaba(5)-服务网关</title>
+        <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/09/19/Spring/Spring-Cloud-Alibaba(5)-%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3/"/>
+        <content type="html">&lt;h1 id=&#34;网关简介&#34;&gt;&lt;a href=&#34;#网关简介&#34; class=&#34;headerlink&#34; title=&#34;网关简介&#34;&gt;&lt;/a&gt;网关简介&lt;/h1&gt;&lt;p&gt;大家都都知道在微服务架构中，一个系统会被拆分为很多个微服务。那么作为客户端要如何去调用这么多的微服务呢？如果没有网关的存在，我们只能在客户端记录每个微服务的地址，然后分别去调用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/7jYrw2bhAay6N9u.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这样的架构，会存在着诸多的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;客户端多次请求不同的微服务，增加客户端代码或配置编写的复杂性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;认证复杂，每个服务都需要独立认证。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;存在跨域请求，在一定场景下处理相对复杂。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;上面的这些问题可以借助&lt;strong&gt;API****网关&lt;/strong&gt;来解决。&lt;/p&gt;
+&lt;p&gt;所谓的API网关，就是指系统的&lt;strong&gt;统一入口&lt;/strong&gt;，它封装了应用程序的内部结构，为客户端提供统一服务，一些与业务本身功能无关的公共逻辑可以在这里实现，诸如认证、鉴权、监控、路由转发等等。&lt;/p&gt;
+&lt;p&gt;添加上API网关之后，系统的架构图变成了如下所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/is1e54KcNrktqMZ.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我们也可以观察下，我们现在的整体架构图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/EMeVtuJa9KjNdLp.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在业界比较流行的网关，有下面这些：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ngnix+lua&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用nginx的反向代理和负载均衡可实现对api服务器的负载均衡及高可用lua是一种脚本语言,可以来编写一些简单的逻辑, nginx支持lua脚本&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Kong&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于Nginx+Lua开发，性能高，稳定，有多个可用的插件(限流、鉴权等等)可以开箱即用。 问题：只支持Http协议；二次开发，自由扩展困难；提供管理API，缺乏更易用的管控、配置方式。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Zuul&lt;/strong&gt; &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Netflflix开源的网关，功能丰富，使用JAVA开发，易于二次开发 问题：缺乏管控，无法动态配置；依赖组件较多；处理Http请求依赖的是Web容器，性能不如Nginx&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Spring Cloud Gateway&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Spring公司为了替换Zuul而开发的网关服务，将在下面具体介绍。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意：SpringCloud alibaba技术栈中并没有提供自己的网关，我们可以采用Spring Cloud Gateway来做网关&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;Gateway简介&#34;&gt;&lt;a href=&#34;#Gateway简介&#34; class=&#34;headerlink&#34; title=&#34;Gateway简介&#34;&gt;&lt;/a&gt;Gateway简介&lt;/h1&gt;&lt;p&gt;Spring Cloud Gateway是Spring公司基于Spring 5.0，Spring Boot 2.0 和 Project Reactor 等技术开发的网关，它旨在为微服务架构提供一种简单有效的统一的 API 路由管理方式。它的目标是替代Netflflix Zuul，其不仅提供统一的路由方式，并且基于 Filter 链的方式提供了网关基本的功能，例如：安全，监控和限流。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;性能强劲：是第一代网关Zuul的1.6倍&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;功能强大：内置了很多实用的功能，例如转发、监控、限流等&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设计优雅，容易扩展&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;其实现依赖Netty与WebFlux，不是传统的Servlet编程模型，学习成本高&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;不能将其部署在Tomcat、Jetty等Servlet容器里，只能打成jar包执行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;需要Spring Boot 2.0及以上的版本，才支持&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;Gateway快速入门&#34;&gt;&lt;a href=&#34;#Gateway快速入门&#34; class=&#34;headerlink&#34; title=&#34;Gateway快速入门&#34;&gt;&lt;/a&gt;Gateway快速入门&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;要求: 通过浏览器访问api网关,然后通过网关将请求转发到商品微服务&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;基础版&#34;&gt;&lt;a href=&#34;#基础版&#34; class=&#34;headerlink&#34; title=&#34;基础版&#34;&gt;&lt;/a&gt;&lt;strong&gt;基础版&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;创建新模块shop-gateway&#34;&gt;&lt;a href=&#34;#创建新模块shop-gateway&#34; class=&#34;headerlink&#34; title=&#34;创建新模块shop-gateway&#34;&gt;&lt;/a&gt;创建新模块&lt;code&gt;shop-gateway&lt;/code&gt;&lt;/h3&gt;&lt;h3 id=&#34;导入相关网关依赖&#34;&gt;&lt;a href=&#34;#导入相关网关依赖&#34; class=&#34;headerlink&#34; title=&#34;导入相关网关依赖&#34;&gt;&lt;/a&gt;导入相关网关依赖&lt;/h3&gt;&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;dependencies&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;&amp;lt;!--gateway网关--&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.cloud&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;tag&#34;&gt;&amp;lt;&lt;span class=&#34;name&#34;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-cloud-starter-gateway&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;tag&#34;&gt;&amp;lt;/&lt;span class=&#34;name&#34;&gt;dependencies&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;创建项目基本包路径com-letcoding-gateway&#34;&gt;&lt;a href=&#34;#创建项目基本包路径com-letcoding-gateway&#34; class=&#34;headerlink&#34; title=&#34;创建项目基本包路径com.letcoding.gateway&#34;&gt;&lt;/a&gt;创建项目基本包路径&lt;code&gt;com.letcoding.gateway&lt;/code&gt;&lt;/h3&gt;&lt;h3 id=&#34;创建shop-gateway模块启动类&#34;&gt;&lt;a href=&#34;#创建shop-gateway模块启动类&#34; class=&#34;headerlink&#34; title=&#34;创建shop-gateway模块启动类&#34;&gt;&lt;/a&gt;创建&lt;code&gt;shop-gateway&lt;/code&gt;模块启动类&lt;/h3&gt;&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;package&lt;/span&gt; com.letcoding.gateway;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; org.springframework.boot.SpringApplication;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; org.springframework.boot.autoconfigure.SpringBootApplication;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * &lt;span class=&#34;doctag&#34;&gt;@ClassName&lt;/span&gt; ShopGatewayApplication&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * &lt;span class=&#34;doctag&#34;&gt;@Description&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * &lt;span class=&#34;doctag&#34;&gt;@Author&lt;/span&gt; will&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; * &lt;span class=&#34;doctag&#34;&gt;@Date&lt;/span&gt; 2021/9/19 8:23&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;@SpringBootApplication&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;ShopGatewayApplication&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(String[] args)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        SpringApplication.run(ShopGatewayApplication.class, args);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;添加配置文件&#34;&gt;&lt;a href=&#34;#添加配置文件&#34; class=&#34;headerlink&#34; title=&#34;添加配置文件&#34;&gt;&lt;/a&gt;添加配置文件&lt;/h3&gt;&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;server:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;port:&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;7000&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;spring:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;application:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;name:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;shop-gateway&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;cloud:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;gateway:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;comment&#34;&gt;# 路由数组[路由 就是指定当请求满足什么条件的时候转到哪个微服务]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;routes:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;attr&#34;&gt;id:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;shop-product&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 当前路由的标识, 要求唯一&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;attr&#34;&gt;uri:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;http://localhost:8081&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 请求要转发到的地址&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;attr&#34;&gt;order:&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 路由的优先级,数字越小级别越高&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;comment&#34;&gt;# 断言(就是路由转发要满足的条件)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;attr&#34;&gt;predicates:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;Path=/shop-product/**&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 当请求路径满足Path指定的规则时,才进行路由转发&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;comment&#34;&gt;# 过滤器,请求在传递过程中可以通过过滤器对其进行一定的修改&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          &lt;span class=&#34;attr&#34;&gt;filters:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;StripPrefix=1&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# 转发之前去掉1层路径&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;启动服务，通过网关访问路径，请求测试&#34;&gt;&lt;a href=&#34;#启动服务，通过网关访问路径，请求测试&#34; class=&#34;headerlink&#34; title=&#34;启动服务，通过网关访问路径，请求测试&#34;&gt;&lt;/a&gt;启动服务，通过网关访问路径，请求测试&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:7000/shop-product/product/info/1&#34;&gt;http://localhost:7000/shop-product/product/info/1&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/sLn7iVPDWmHORjr.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;增强版&#34;&gt;&lt;a href=&#34;#增强版&#34; class=&#34;headerlink&#34; title=&#34;增强版&#34;&gt;&lt;/a&gt;增强版&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;现在在配置文件中写死了转发路径的地址, 前面我们已经分析过地址写死带来的问题, 接下来我们从注册中心获取此地址。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;添加依赖&#34;&gt;&lt;a href=&#34;#添加依赖&#34; class=&#34;headerlink&#34; title=&#34;添加依赖&#34;&gt;&lt;/a&gt;添加依赖&lt;/h3&gt;&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;!--nacos客户端--&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;groupId&amp;gt;com.alibaba.cloud&amp;lt;&amp;#x2F;groupId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;lt;artifactId&amp;gt;spring-cloud-starter-alibaba-nacos-discovery&amp;lt;&amp;#x2F;artifactId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;&amp;#x2F;dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;添加注解，让注册中心能发现&#34;&gt;&lt;a href=&#34;#添加注解，让注册中心能发现&#34; class=&#34;headerlink&#34; title=&#34;添加注解，让注册中心能发现&#34;&gt;&lt;/a&gt;添加注解，让注册中心能发现&lt;/h3&gt;&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;**&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; * @ClassName ShopGatewayApplication&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; * @Description&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; * @Author will&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; * @Date 2021&amp;#x2F;9&amp;#x2F;19 8:23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; *&amp;#x2F;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;@SpringBootApplication&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;@EnableDiscoveryClient&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public class ShopGatewayApplication &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    public static void main(String[] args) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        SpringApplication.run(ShopGatewayApplication.class, args);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;修改配置文件&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;server:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  port: 7000&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;spring:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  application:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    name: shop-gateway&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  cloud:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    nacos:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      discovery:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        server-addr: 192.168.56.120:8848&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        namespace: 6d39b87a-55bb-4497-bec5-79bdd3b9789b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    gateway:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      discovery:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        locator:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          enabled: true&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      # 路由数组[路由 就是指定当请求满足什么条件的时候转到哪个微服务]&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      routes:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        - id: shop-product # 当前路由的标识, 要求唯一&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          uri: lib:&amp;#x2F;&amp;#x2F;shop-product # 请求要转发到的地址&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          order: 1 # 路由的优先级,数字越小级别越高&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          # 断言(就是路由转发要满足的条件)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          predicates:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            - Path&amp;#x3D;&amp;#x2F;shop-product&amp;#x2F;** # 当请求路径满足Path指定的规则时,才进行路由转发&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          # 过滤器,请求在传递过程中可以通过过滤器对其进行一定的修改&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          filters:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            - StripPrefix&amp;#x3D;1 # 转发之前去掉1层路径&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;启动测试&#34;&gt;&lt;a href=&#34;#启动测试&#34; class=&#34;headerlink&#34; title=&#34;启动测试&#34;&gt;&lt;/a&gt;启动测试&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;备注：这里说一个博猪开发的微服务开发的习惯：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;启动项目&lt;/li&gt;
+&lt;li&gt;打开对应环境配置的注册发现中心-&lt;code&gt;nacos&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;打开&lt;code&gt;服务管理&lt;/code&gt;-&lt;code&gt;服务配置&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;查看服务是否启动成功&lt;/li&gt;
+&lt;li&gt;查看使用服务是否都在一个服务环境里面，&lt;code&gt;nacos&lt;/code&gt;默认为&lt;code&gt;public&lt;/code&gt;,不用环境服务调试的时候不通的！！！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;访问地址：&lt;a href=&#34;http://localhost:7000/shop-product/product/info/1&#34;&gt;http://localhost:7000/shop-product/product/info/1&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/sLn7iVPDWmHORjr.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;简写版&#34;&gt;&lt;a href=&#34;#简写版&#34; class=&#34;headerlink&#34; title=&#34;简写版&#34;&gt;&lt;/a&gt;简写版&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;有人可能觉得上方配置可能太繁琐了，在开发中流行一句话&lt;code&gt;约定大于配置&lt;/code&gt;，而&lt;code&gt;SpringCloud-gateway&lt;/code&gt;也遵循了这么一个良好的规范，如果对于这一块不太了解的朋友，请先学习一下&lt;code&gt;SpringBoot&lt;/code&gt;，对于&lt;code&gt;去配置化&lt;/code&gt;有个大概的了解，同时对&lt;code&gt;SpringCloud&lt;/code&gt;也有个基础。当然话归正题我还是不太建议这样配置的，当然日常开发中也很少使用到默认的配置，这里只限于练习配置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;修改配置&#34;&gt;&lt;a href=&#34;#修改配置&#34; class=&#34;headerlink&#34; title=&#34;修改配置&#34;&gt;&lt;/a&gt;修改配置&lt;/h3&gt;&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;server:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  port: 7000&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;spring:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  application:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    name: shop-gateway&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  cloud:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    nacos:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      discovery:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        server-addr: 192.168.56.120:8848&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        namespace: 6d39b87a-55bb-4497-bec5-79bdd3b9789b&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    gateway:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      discovery:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        locator:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          enabled: true&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&#34;启动测试-1&#34;&gt;&lt;a href=&#34;#启动测试-1&#34; class=&#34;headerlink&#34; title=&#34;启动测试&#34;&gt;&lt;/a&gt;启动测试&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;访问地址：&lt;a href=&#34;http://localhost:7000/shop-product/product/info/1&#34;&gt;http://localhost:7000/shop-product/product/info/1&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/09/19/sLn7iVPDWmHORjr.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这时候，就发现只要按照&lt;strong&gt;网关地址/微服务/接口&lt;/strong&gt;的格式去访问，就可以得到成功响应。&lt;/p&gt;
+&lt;p&gt;同时这里也会发现我之前的命名规则和一些开发习惯，这个也会省去很大的功夫，所以我很建议个人再去开发的时候一定要好好设计一下自己的代码编写规范和实现的逻辑思路。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;Gateway核心架构&#34;&gt;&lt;a href=&#34;#Gateway核心架构&#34; class=&#34;headerlink&#34; title=&#34;Gateway核心架构&#34;&gt;&lt;/a&gt;Gateway核心架构&lt;/h1&gt;&lt;h2 id=&#34;基本概念&#34;&gt;&lt;a href=&#34;#基本概念&#34; class=&#34;headerlink&#34; title=&#34;基本概念&#34;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;p&gt;路由(Route) 是 gateway 中最基本的组件之一，表示一个具体的路由信息载体。主要定义了下面的几个信息:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;字段名&lt;/th&gt;
+&lt;th&gt;字段含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;id&lt;/td&gt;
+&lt;td&gt;路由标识符，区别于其他 Route&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;uri&lt;/td&gt;
+&lt;td&gt;路由指向的目的地 uri，即客户端请求最终被转发到的微服务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;order&lt;/td&gt;
+&lt;td&gt;用于多个 Route 之间的排序，数值越小排序越靠前，匹配优先级越高&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;predicate&lt;/td&gt;
+&lt;td&gt;断言的作用是进行条件判断，只有断言都返回真，才会真正的执行路由&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;filter&lt;/td&gt;
+&lt;td&gt;过滤器用于修改请求和响应信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+</content>
+        <category term="Spring Cloud" />
+        <updated>2021-09-19T00:01:34.383Z</updated>
+    </entry>
     <entry>
         <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/09/18/Tool/IDEA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%AE%E5%BD%95/</id>
         <title>IDEA自定义插件目录</title>
@@ -2059,58 +2200,6 @@
         <updated>2021-07-12T14:58:41.222Z</updated>
     </entry>
     <entry>
-        <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Other/%E8%87%B4%E6%AD%A3%E5%9C%A8%E5%A5%8B%E6%96%97%E8%B7%AF%E4%B8%8A%E7%9A%84%E4%BD%A0/</id>
-        <title>致正在奋斗路上的你</title>
-        <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Other/%E8%87%B4%E6%AD%A3%E5%9C%A8%E5%A5%8B%E6%96%97%E8%B7%AF%E4%B8%8A%E7%9A%84%E4%BD%A0/"/>
-        <content type="html">&lt;h1 id=&#34;致正在奋斗路上的你&#34;&gt;&lt;a href=&#34;#致正在奋斗路上的你&#34; class=&#34;headerlink&#34; title=&#34;致正在奋斗路上的你&#34;&gt;&lt;/a&gt;致正在奋斗路上的你&lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;写这个博客的目的主要是为了针对身边某些正在处于大学的朋友，感觉他们很迷茫，然后很刻苦，但是感觉努力的不在点上，所以我趁我考试的路上写下了这篇博客，一是为了记录一下这次旅行和放松的机会；二是给身边的一些朋友&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt; 当你看到这个文章的时候，本博猪正在从大连回北京的路上，此时九点五十左右，博猪辗转反侧，夜不能寐，特此写下这篇文章，记录一下次不是在上坡的路上就是在上坡的路上的考试之旅，顺便缓解一下博猪六个小时屁股的煎熬。&lt;br&gt;  首先按照常规流程博猪自我介绍一下，博猪笔名will，意义如何自行百度，98年出身，山东泰安人士，本博猪2019年3月份入坑，主要从事于车险，车险金融行业，先后参与过北汽鹏龙二期改造、北汽鹏龙微信端开发，捷通达集团车险经济平台理赔、续保、新车销售、部分报表统计等开发，参与北汽鹏龙中行、平安、浙江中行快速对接和流程设计和开发（SSI架构，前端LayUI），捷通达参与Erp,Sap系统资源对接，目前手里维护者九、十个左右的项目，目前正在长城驻场开发，参与车服务保代经济云系统、续保系统，主要负责续保系统的需求分析和业务开发，车服务系统对账方面开发和长城原系统和第三方系统对接封装基于spring cloud alibaba的相关工具类。目前项目已经上生产环境，目前正协助压测人员进行压力测试。&lt;/p&gt;
-&lt;p&gt;OK，博猪履历介绍到这里，俗话说三年小架构，博猪目标如此，也正在努力的朝着这个目标前进，废话不说博猪写这篇文章的目的是分享一下自己的学习方式和一些学习心得，缘由是博猪身边有几个入坑这个专业的大学生最近看他们也是挺努力刻苦的，但是学习的点总是不在那个关键的地方上，这样博猪心有余而力不足，想好心帮忙但是每次都是很费劲的完成。&lt;br&gt;那么，我分享一下我的学习方式，顺便跟着博猪思考一下博猪对你们的问题，是否对你现在有所触动和能解决你手里的问题！&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;有目的的学习&lt;/p&gt;
-&lt;p&gt;目的很重要，因为它是你迷茫路上的一个指路灯，至少它能让你有一个目的地，在我的世界观里面target很重要，至少它能让你知道你下一步至少干啥，然后具体咋实现看你如何安排了。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Q:     你是否有想过近三年或者你毕业进入社会想干啥或者想过什么样的生活了没有？&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;坚持&lt;/p&gt;
-&lt;p&gt;俗话说师傅领进门，修行靠个人，虽然博猪当时也啥都学，什么3dmax，ps，电商，嗯，因为我刚开始报的是电商的专业，然后大一上学期末临时转的软件开发，然后靠扎实的C语言的基础，自学的JAVA，JAVAEE，JAVA WEB，MySQL等，因为学校教程太慢，太杂，我当时的想法很简单，就是工作，然后赚钱，然后我静静的边抽烟边刷了一遍招聘软件上的软件开发的技术，然后回去下载资料，自己学，上机课我就偷偷的猫到一个角落自己戴着耳机学习，然后一遍遍的码代码，自己不关心的科目期末不挂科就行，寒暑假初中同学高中同学聚会能推就推。&lt;br&gt;所以，如果说我提出的第一点占头百分之二十的话，那么坚持就能占百分之七十。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Q:    如果你已经深深的思考了第一题，那么鉴于第一题的基础上，你是否能你的目标坚持下去的努力？&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;不浮躁&lt;/p&gt;
-&lt;p&gt;博猪很喜欢博猪学校的校训:坚持 不浮躁，坚持容易，不浮躁难。coding本身就是一个很枯燥无聊，甚至很容易没得朋友的一个事情，所以让自己的心沉下来很重要。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;有属于自己的学习体系&lt;/p&gt;
-&lt;p&gt;有自己的学习体系很重要，作为一个成年人应该有个事情紧急程度的排序，给自己的科目或者事情排个序，那个可以做那个可以不做，不要把自己搞得很乱又很累。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;学会自己思考&lt;/p&gt;
-&lt;p&gt;身边的朋友很多就是遇到问题就是，为啥明明都是一模一样的，为啥我的就直接报错，那么你有没有想过这个程序为啥这样执行？还有你执行完一个程序后是否进行复验程序？程序是不会骗人的，所以多多吃一些异常报错有营养，对自己成长有好处的。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;学会自己解决问题&lt;/p&gt;
-&lt;p&gt;遇到一个问题以后，你要相信一句话这个一定不是你一个人再犯，肯定会有前人给你踩过坑，所以遇到问题学会找谷哥或者找度娘。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;学会正确的搜索关键词&lt;/p&gt;
-&lt;p&gt;一个正确的搜索关键词会大大提高搜索引擎给你的搜索结果，也大大减少了浏览器因模糊或者一些广告给你带来的困扰。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;切勿好高骛远&lt;/p&gt;
-&lt;p&gt;博猪最近遇到很多刚入行的小白，感觉微服务不过如此，业主不过如此，但是真正到自己手里的时候，连最基本的crud都不会，当然博猪和技术经理交给他们的这就是一些crud的项目模块，当然前期由于长城这个公司刚成立，一些最基本的技术沉淀都没有，当然博猪算是经历了一次一个公司技术体系从无到有的一个过程。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;建议藏在内容里面，答案请自行寻找&lt;/p&gt;
-&lt;p&gt;俗话说的好，九为数极，哈哈，这个建议是针对将来入职程序猿的盆友建议，如果还在读大学建议赶紧找个对象，要不然你会发现你工作入职后不是你想象的白领的生活，而是整天不断的需求和加班，996的生活，正在朝着你招手，所以博猪最大的遗憾就是没在大学期间找个女票。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;话就絮叨到这里了，22点50了，车快到站了，博猪也要收拾一下东西回家了，哈哈末尾送你们一句话，也是博猪最近闲下来刷剧看到的一句话感觉挺不错的，句子如下：&lt;br&gt;   须知少时凌云志，曾许人间第一流！&lt;/p&gt;
-&lt;p&gt;下面贴两张博猪拍的两张图片：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://gitee.com/yangxiangnanWorkSpace/uploadImages/raw/master/static/20201026135857.jpg&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://gitee.com/yangxiangnanWorkSpace/uploadImages/raw/master/static/20201026135915.jpg&#34;&gt;&lt;/p&gt;
-</content>
-        <category term="随笔" />
-        <updated>2021-07-12T14:58:41.221Z</updated>
-    </entry>
-    <entry>
         <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Spring/Spring-Cloud-Alibaba(1)-%E5%A4%A7%E8%AF%9DSpring%20Cloud/</id>
         <title>Spring Cloud Alibaba(1)-大话Spring Cloud</title>
         <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Spring/Spring-Cloud-Alibaba(1)-%E5%A4%A7%E8%AF%9DSpring%20Cloud/"/>
@@ -2217,6 +2306,58 @@
 &lt;/blockquote&gt;
 </content>
         <category term="Spring Cloud" />
+        <updated>2021-07-12T14:58:41.221Z</updated>
+    </entry>
+    <entry>
+        <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Other/%E8%87%B4%E6%AD%A3%E5%9C%A8%E5%A5%8B%E6%96%97%E8%B7%AF%E4%B8%8A%E7%9A%84%E4%BD%A0/</id>
+        <title>致正在奋斗路上的你</title>
+        <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Other/%E8%87%B4%E6%AD%A3%E5%9C%A8%E5%A5%8B%E6%96%97%E8%B7%AF%E4%B8%8A%E7%9A%84%E4%BD%A0/"/>
+        <content type="html">&lt;h1 id=&#34;致正在奋斗路上的你&#34;&gt;&lt;a href=&#34;#致正在奋斗路上的你&#34; class=&#34;headerlink&#34; title=&#34;致正在奋斗路上的你&#34;&gt;&lt;/a&gt;致正在奋斗路上的你&lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;写这个博客的目的主要是为了针对身边某些正在处于大学的朋友，感觉他们很迷茫，然后很刻苦，但是感觉努力的不在点上，所以我趁我考试的路上写下了这篇博客，一是为了记录一下这次旅行和放松的机会；二是给身边的一些朋友&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 当你看到这个文章的时候，本博猪正在从大连回北京的路上，此时九点五十左右，博猪辗转反侧，夜不能寐，特此写下这篇文章，记录一下次不是在上坡的路上就是在上坡的路上的考试之旅，顺便缓解一下博猪六个小时屁股的煎熬。&lt;br&gt;  首先按照常规流程博猪自我介绍一下，博猪笔名will，意义如何自行百度，98年出身，山东泰安人士，本博猪2019年3月份入坑，主要从事于车险，车险金融行业，先后参与过北汽鹏龙二期改造、北汽鹏龙微信端开发，捷通达集团车险经济平台理赔、续保、新车销售、部分报表统计等开发，参与北汽鹏龙中行、平安、浙江中行快速对接和流程设计和开发（SSI架构，前端LayUI），捷通达参与Erp,Sap系统资源对接，目前手里维护者九、十个左右的项目，目前正在长城驻场开发，参与车服务保代经济云系统、续保系统，主要负责续保系统的需求分析和业务开发，车服务系统对账方面开发和长城原系统和第三方系统对接封装基于spring cloud alibaba的相关工具类。目前项目已经上生产环境，目前正协助压测人员进行压力测试。&lt;/p&gt;
+&lt;p&gt;OK，博猪履历介绍到这里，俗话说三年小架构，博猪目标如此，也正在努力的朝着这个目标前进，废话不说博猪写这篇文章的目的是分享一下自己的学习方式和一些学习心得，缘由是博猪身边有几个入坑这个专业的大学生最近看他们也是挺努力刻苦的，但是学习的点总是不在那个关键的地方上，这样博猪心有余而力不足，想好心帮忙但是每次都是很费劲的完成。&lt;br&gt;那么，我分享一下我的学习方式，顺便跟着博猪思考一下博猪对你们的问题，是否对你现在有所触动和能解决你手里的问题！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;有目的的学习&lt;/p&gt;
+&lt;p&gt;目的很重要，因为它是你迷茫路上的一个指路灯，至少它能让你有一个目的地，在我的世界观里面target很重要，至少它能让你知道你下一步至少干啥，然后具体咋实现看你如何安排了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Q:     你是否有想过近三年或者你毕业进入社会想干啥或者想过什么样的生活了没有？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;坚持&lt;/p&gt;
+&lt;p&gt;俗话说师傅领进门，修行靠个人，虽然博猪当时也啥都学，什么3dmax，ps，电商，嗯，因为我刚开始报的是电商的专业，然后大一上学期末临时转的软件开发，然后靠扎实的C语言的基础，自学的JAVA，JAVAEE，JAVA WEB，MySQL等，因为学校教程太慢，太杂，我当时的想法很简单，就是工作，然后赚钱，然后我静静的边抽烟边刷了一遍招聘软件上的软件开发的技术，然后回去下载资料，自己学，上机课我就偷偷的猫到一个角落自己戴着耳机学习，然后一遍遍的码代码，自己不关心的科目期末不挂科就行，寒暑假初中同学高中同学聚会能推就推。&lt;br&gt;所以，如果说我提出的第一点占头百分之二十的话，那么坚持就能占百分之七十。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Q:    如果你已经深深的思考了第一题，那么鉴于第一题的基础上，你是否能你的目标坚持下去的努力？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;不浮躁&lt;/p&gt;
+&lt;p&gt;博猪很喜欢博猪学校的校训:坚持 不浮躁，坚持容易，不浮躁难。coding本身就是一个很枯燥无聊，甚至很容易没得朋友的一个事情，所以让自己的心沉下来很重要。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;有属于自己的学习体系&lt;/p&gt;
+&lt;p&gt;有自己的学习体系很重要，作为一个成年人应该有个事情紧急程度的排序，给自己的科目或者事情排个序，那个可以做那个可以不做，不要把自己搞得很乱又很累。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;学会自己思考&lt;/p&gt;
+&lt;p&gt;身边的朋友很多就是遇到问题就是，为啥明明都是一模一样的，为啥我的就直接报错，那么你有没有想过这个程序为啥这样执行？还有你执行完一个程序后是否进行复验程序？程序是不会骗人的，所以多多吃一些异常报错有营养，对自己成长有好处的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;学会自己解决问题&lt;/p&gt;
+&lt;p&gt;遇到一个问题以后，你要相信一句话这个一定不是你一个人再犯，肯定会有前人给你踩过坑，所以遇到问题学会找谷哥或者找度娘。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;学会正确的搜索关键词&lt;/p&gt;
+&lt;p&gt;一个正确的搜索关键词会大大提高搜索引擎给你的搜索结果，也大大减少了浏览器因模糊或者一些广告给你带来的困扰。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;切勿好高骛远&lt;/p&gt;
+&lt;p&gt;博猪最近遇到很多刚入行的小白，感觉微服务不过如此，业主不过如此，但是真正到自己手里的时候，连最基本的crud都不会，当然博猪和技术经理交给他们的这就是一些crud的项目模块，当然前期由于长城这个公司刚成立，一些最基本的技术沉淀都没有，当然博猪算是经历了一次一个公司技术体系从无到有的一个过程。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;建议藏在内容里面，答案请自行寻找&lt;/p&gt;
+&lt;p&gt;俗话说的好，九为数极，哈哈，这个建议是针对将来入职程序猿的盆友建议，如果还在读大学建议赶紧找个对象，要不然你会发现你工作入职后不是你想象的白领的生活，而是整天不断的需求和加班，996的生活，正在朝着你招手，所以博猪最大的遗憾就是没在大学期间找个女票。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;话就絮叨到这里了，22点50了，车快到站了，博猪也要收拾一下东西回家了，哈哈末尾送你们一句话，也是博猪最近闲下来刷剧看到的一句话感觉挺不错的，句子如下：&lt;br&gt;   须知少时凌云志，曾许人间第一流！&lt;/p&gt;
+&lt;p&gt;下面贴两张博猪拍的两张图片：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gitee.com/yangxiangnanWorkSpace/uploadImages/raw/master/static/20201026135857.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://gitee.com/yangxiangnanWorkSpace/uploadImages/raw/master/static/20201026135915.jpg&#34;&gt;&lt;/p&gt;
+</content>
+        <category term="随笔" />
         <updated>2021-07-12T14:58:41.221Z</updated>
     </entry>
     <entry>
@@ -5504,6 +5645,127 @@ pm.expect(jsonData.weatherinfo.city).to.eql(&amp;#39;北京&amp;#39;);
         <updated>2021-07-12T14:58:41.206Z</updated>
     </entry>
     <entry>
+        <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(1)-%E5%88%9D%E8%AF%86Docker/</id>
+        <title>Docker(1)-初识Docker</title>
+        <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(1)-%E5%88%9D%E8%AF%86Docker/"/>
+        <content type="html">&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;本人文章均引用或者复制：&lt;/p&gt;
+&lt;p&gt;公众号：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.cicoding.cn/icons/wx.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;QQ群：&lt;a href=&#34;http://shang.qq.com/wpa/qunwpa?idkey=85cfa5c4c8fbe9859b7166a33d84c32f2def325c4d29f35f299a5756a955ab21&#34;&gt;806951874&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;Docker的前世今生&#34;&gt;&lt;a href=&#34;#Docker的前世今生&#34; class=&#34;headerlink&#34; title=&#34;Docker的前世今生&#34;&gt;&lt;/a&gt;Docker的前世今生&lt;/h1&gt;&lt;h2 id=&#34;传统项目开发部署的流程是怎样的？&#34;&gt;&lt;a href=&#34;#传统项目开发部署的流程是怎样的？&#34; class=&#34;headerlink&#34; title=&#34;传统项目开发部署的流程是怎样的？&#34;&gt;&lt;/a&gt;传统项目开发部署的流程是怎样的？&lt;/h2&gt;&lt;h3 id=&#34;传统项目开发部署的基本流程&#34;&gt;&lt;a href=&#34;#传统项目开发部署的基本流程&#34; class=&#34;headerlink&#34; title=&#34;传统项目开发部署的基本流程&#34;&gt;&lt;/a&gt;传统项目开发部署的基本流程&lt;/h3&gt;&lt;p&gt;这里只简单描述一下，项目发布的基本流程&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本地开发+测试，没有问题的话，编译打包发布到测试环境&lt;/li&gt;
+&lt;li&gt;在测试环境中进行测试，测试完成后，发布到生产环境&lt;/li&gt;
+&lt;li&gt;在生产环境中进行最后的测试，如果没有问题，那么一切就OK了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;存在什么问题？&#34;&gt;&lt;a href=&#34;#存在什么问题？&#34; class=&#34;headerlink&#34; title=&#34;存在什么问题？&#34;&gt;&lt;/a&gt;存在什么问题？&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;存在问题：不同机器上的软件环境不一致。（比较核心的问题)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;软件环境的配置繁多、命令记不清楚。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重复性搭建软件环境、效率低下。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;对照传统虚拟机总结&#34;&gt;&lt;a href=&#34;#对照传统虚拟机总结&#34; class=&#34;headerlink&#34; title=&#34;对照传统虚拟机总结&#34;&gt;&lt;/a&gt;对照传统虚拟机总结&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;特性&lt;/th&gt;
+&lt;th&gt;容器&lt;/th&gt;
+&lt;th&gt;虚拟机&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;启动&lt;/td&gt;
+&lt;td&gt;秒级&lt;/td&gt;
+&lt;td&gt;分钟级&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;硬盘使用&lt;/td&gt;
+&lt;td&gt;一般为MB&lt;/td&gt;
+&lt;td&gt;一般为GB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;性能&lt;/td&gt;
+&lt;td&gt;接近原生&lt;/td&gt;
+&lt;td&gt;弱于&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;系统支持量&lt;/td&gt;
+&lt;td&gt;单机支持上千个容器&lt;/td&gt;
+&lt;td&gt;一般几十个&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h1 id=&#34;Docker是干什么用的？&#34;&gt;&lt;a href=&#34;#Docker是干什么用的？&#34; class=&#34;headerlink&#34; title=&#34;Docker是干什么用的？&#34;&gt;&lt;/a&gt;Docker是干什么用的？&lt;/h1&gt;&lt;h2 id=&#34;Docker解决的问题&#34;&gt;&lt;a href=&#34;#Docker解决的问题&#34; class=&#34;headerlink&#34; title=&#34;Docker解决的问题&#34;&gt;&lt;/a&gt;Docker解决的问题&lt;/h2&gt;&lt;p&gt;由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。&lt;br&gt;Docker 主要解决环境配置问题，它是一种虚拟化技术，对进程进行隔离，被隔离的进程独立于宿主操作系统和其它隔离的进程。使用 Docker 可以不修改应用程序代码，不需要开发人员学习特定环境下的技术，就能够将现有的应用程序部署在其它机器上。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2520176274,3530821872&amp;fm=26&amp;gp=0.jpg&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;与虚拟机的比较&#34;&gt;&lt;a href=&#34;#与虚拟机的比较&#34; class=&#34;headerlink&#34; title=&#34;与虚拟机的比较&#34;&gt;&lt;/a&gt;与虚拟机的比较&lt;/h2&gt;&lt;p&gt;虚拟机也是一种虚拟化技术，它与 Docker 最大的区别在于它是通过模拟硬件，并在硬件上安装操作系统来实现。&lt;/p&gt;
+&lt;p&gt;so&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;==&lt;strong&gt;Docker不是虚拟机&lt;/strong&gt;==&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对Docker的感受：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;比如公司买了一台新服务器，系统是centos，你要想把项目部署到服务器上，而且项目中使用到了mysql、redis、activemq、zookeeper等技术，要想项目能在服务器上正常运行，必须在新的服务器上搭建好mysql、redis、activemq、zookeeper服务环境。这样的话，在环境搭建和配置上就要花费太多的时间了（因为需要配置很多的配置文件、需要手动启动服务等）。&lt;/p&gt;
+&lt;p&gt;又或者每次重装一次系统或者换一个机器，你就要把环境重装一次，东西越多花费的时间越多、很麻烦、浪费时间和精力。&lt;/p&gt;
+&lt;p&gt;而使用Docker的话，你只需要一条命令，你就可以在你的centos系统上运行你需要的软件，比如mysql、tomcat、jdk、redis等。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;举个栗子&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;【示例1】：Docker上安装mysql&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你需要MySQL服务，那么在docker中通过简单的命令就可以安装一个MySQL数据库服务：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker pull mysql&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;启动mysql命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker run -d -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 mysql&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;很简单吧，一个mysql服务就启动完成了，就可以正常使用了。可以通过mysql客户端（Navicat、DataGrip等）连接这个mysql数据库。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;【示例2】：Docker上安装jdk&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你需要JDK环境，那么在Docker中通过简单的命令安装一个JDK的镜像， 然后通过一条命令启动这个容器就行了，容器会自动给你安装配置好JDK环境。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker pull java&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;就这么简单的一条命令，JDK就安装好了。你可以在Docker容器的命令行中通过java -version来检测jdk是否安装成功。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;镜像、容器&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;对于新手而言，或许有点不明白镜像和容器分别是个什么东东，还是有点不明白。&lt;/p&gt;
+&lt;p&gt;你可以这样感官的理解：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;镜像 —— 相当于ISO操作系统的安装包，ISO镜像的内容是固定的，不会发生改变，可以重复使用。&lt;/p&gt;
+&lt;p&gt;容器 —— 类似于使用 ISO镜像安装的新的操作系统，可以使用一个相同的ISO镜像，安装很多操作系统。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Docker占用的资源很小。启动一个容器一般都是秒级的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;Docker镜像、容器、仓库的介绍&#34;&gt;&lt;a href=&#34;#Docker镜像、容器、仓库的介绍&#34; class=&#34;headerlink&#34; title=&#34;Docker镜像、容器、仓库的介绍&#34;&gt;&lt;/a&gt;Docker镜像、容器、仓库的介绍&lt;/h1&gt;&lt;h2 id=&#34;Docker镜像&#34;&gt;&lt;a href=&#34;#Docker镜像&#34; class=&#34;headerlink&#34; title=&#34;Docker镜像&#34;&gt;&lt;/a&gt;Docker镜像&lt;/h2&gt;&lt;p&gt;通俗的理解镜像&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Docker的镜像是一个只读的模板，一个独立的文件系统，包括运行容器所需的数据，可以用来创建新的容器。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Docker的镜像相当于ISO操作系统的安装包，ISO镜像的内容是固定的，不会发生改变，可以重复使用。&lt;/p&gt;
+&lt;p&gt;如果上面的形容还无法让你理解Docker镜像，那我再举一个例子：&lt;/p&gt;
+&lt;p&gt;从事Java开发的人都知道类和实例的关系。直观的感觉，类就像是一个模板，根据这个类模板，可以生成很多个具体的对象实例。&lt;/p&gt;
+&lt;p&gt;则，&lt;strong&gt;Docker镜像就相当于Java的类，而通过Docker镜像生成出来的东西，我们就叫他它“容器”&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;通过上面的形容，应该可以感觉的到镜像和容器之间的关系了吧。&lt;/p&gt;
+&lt;h2 id=&#34;Docker容器&#34;&gt;&lt;a href=&#34;#Docker容器&#34; class=&#34;headerlink&#34; title=&#34;Docker容器&#34;&gt;&lt;/a&gt;Docker容器&lt;/h2&gt;&lt;p&gt;通俗的理解容器&lt;/p&gt;
+&lt;p&gt;在上一节已经介绍了镜像与容器的关系。&lt;/p&gt;
+&lt;p&gt;这里就直接copy文档中的一句话，来简单形容一下容器：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Docker镜像就相当于Java的类，而通过Docker镜像生成出来的东西，我们就叫他它“容器”&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;Docker仓库&#34;&gt;&lt;a href=&#34;#Docker仓库&#34; class=&#34;headerlink&#34; title=&#34;Docker仓库&#34;&gt;&lt;/a&gt;Docker仓库&lt;/h2&gt;&lt;p&gt;通俗的理解Docker仓库&lt;/p&gt;
+&lt;p&gt;仓库支持的操作类似git，当用户创建了自己的镜像之后就可以使用 push 命令将它上传到公有或者私有仓库，这样下次在另外一台机器上使用这个镜像时候，只需要从仓库上 pull 下来就可以了。&lt;/p&gt;
+&lt;p&gt;类似于，将某项目模块打成jar包，然后上传到私有或者公有的maven仓库，然后在其他的所有支持maven环境的机器上，都可以拉取这个jar进行使用。&lt;/p&gt;
+</content>
+        <category term="Docker" />
+        <updated>2021-07-12T14:58:41.205Z</updated>
+    </entry>
+    <entry>
         <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(2)-CentOS%E5%AE%89%E8%A3%85/</id>
         <title>Docker(2)-CentOS安装</title>
         <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(2)-CentOS%E5%AE%89%E8%A3%85/"/>
@@ -5681,127 +5943,6 @@ pm.expect(jsonData.weatherinfo.city).to.eql(&amp;#39;北京&amp;#39;);
 &lt;p&gt;这样执行完了就完成安装了，简单便捷&lt;/p&gt;
 &lt;p&gt;然后启动docker&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl start docker&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-        <category term="Docker" />
-        <updated>2021-07-12T14:58:41.205Z</updated>
-    </entry>
-    <entry>
-        <id>https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(1)-%E5%88%9D%E8%AF%86Docker/</id>
-        <title>Docker(1)-初识Docker</title>
-        <link rel="alternate" href="https://github.com/yangxiangnanwill/yangxiangnanwill.github.io/2021/07/12/Docker/Docker(1)-%E5%88%9D%E8%AF%86Docker/"/>
-        <content type="html">&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;本人文章均引用或者复制：&lt;/p&gt;
-&lt;p&gt;公众号：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://www.cicoding.cn/icons/wx.jpg&#34;&gt;&lt;/p&gt;
-&lt;p&gt;QQ群：&lt;a href=&#34;http://shang.qq.com/wpa/qunwpa?idkey=85cfa5c4c8fbe9859b7166a33d84c32f2def325c4d29f35f299a5756a955ab21&#34;&gt;806951874&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;Docker的前世今生&#34;&gt;&lt;a href=&#34;#Docker的前世今生&#34; class=&#34;headerlink&#34; title=&#34;Docker的前世今生&#34;&gt;&lt;/a&gt;Docker的前世今生&lt;/h1&gt;&lt;h2 id=&#34;传统项目开发部署的流程是怎样的？&#34;&gt;&lt;a href=&#34;#传统项目开发部署的流程是怎样的？&#34; class=&#34;headerlink&#34; title=&#34;传统项目开发部署的流程是怎样的？&#34;&gt;&lt;/a&gt;传统项目开发部署的流程是怎样的？&lt;/h2&gt;&lt;h3 id=&#34;传统项目开发部署的基本流程&#34;&gt;&lt;a href=&#34;#传统项目开发部署的基本流程&#34; class=&#34;headerlink&#34; title=&#34;传统项目开发部署的基本流程&#34;&gt;&lt;/a&gt;传统项目开发部署的基本流程&lt;/h3&gt;&lt;p&gt;这里只简单描述一下，项目发布的基本流程&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;本地开发+测试，没有问题的话，编译打包发布到测试环境&lt;/li&gt;
-&lt;li&gt;在测试环境中进行测试，测试完成后，发布到生产环境&lt;/li&gt;
-&lt;li&gt;在生产环境中进行最后的测试，如果没有问题，那么一切就OK了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;存在什么问题？&#34;&gt;&lt;a href=&#34;#存在什么问题？&#34; class=&#34;headerlink&#34; title=&#34;存在什么问题？&#34;&gt;&lt;/a&gt;存在什么问题？&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;存在问题：不同机器上的软件环境不一致。（比较核心的问题)&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;软件环境的配置繁多、命令记不清楚。&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;重复性搭建软件环境、效率低下。&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;对照传统虚拟机总结&#34;&gt;&lt;a href=&#34;#对照传统虚拟机总结&#34; class=&#34;headerlink&#34; title=&#34;对照传统虚拟机总结&#34;&gt;&lt;/a&gt;对照传统虚拟机总结&lt;/h2&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;特性&lt;/th&gt;
-&lt;th&gt;容器&lt;/th&gt;
-&lt;th&gt;虚拟机&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;启动&lt;/td&gt;
-&lt;td&gt;秒级&lt;/td&gt;
-&lt;td&gt;分钟级&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;硬盘使用&lt;/td&gt;
-&lt;td&gt;一般为MB&lt;/td&gt;
-&lt;td&gt;一般为GB&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;性能&lt;/td&gt;
-&lt;td&gt;接近原生&lt;/td&gt;
-&lt;td&gt;弱于&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;系统支持量&lt;/td&gt;
-&lt;td&gt;单机支持上千个容器&lt;/td&gt;
-&lt;td&gt;一般几十个&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;h1 id=&#34;Docker是干什么用的？&#34;&gt;&lt;a href=&#34;#Docker是干什么用的？&#34; class=&#34;headerlink&#34; title=&#34;Docker是干什么用的？&#34;&gt;&lt;/a&gt;Docker是干什么用的？&lt;/h1&gt;&lt;h2 id=&#34;Docker解决的问题&#34;&gt;&lt;a href=&#34;#Docker解决的问题&#34; class=&#34;headerlink&#34; title=&#34;Docker解决的问题&#34;&gt;&lt;/a&gt;Docker解决的问题&lt;/h2&gt;&lt;p&gt;由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。&lt;br&gt;Docker 主要解决环境配置问题，它是一种虚拟化技术，对进程进行隔离，被隔离的进程独立于宿主操作系统和其它隔离的进程。使用 Docker 可以不修改应用程序代码，不需要开发人员学习特定环境下的技术，就能够将现有的应用程序部署在其它机器上。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2520176274,3530821872&amp;fm=26&amp;gp=0.jpg&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;与虚拟机的比较&#34;&gt;&lt;a href=&#34;#与虚拟机的比较&#34; class=&#34;headerlink&#34; title=&#34;与虚拟机的比较&#34;&gt;&lt;/a&gt;与虚拟机的比较&lt;/h2&gt;&lt;p&gt;虚拟机也是一种虚拟化技术，它与 Docker 最大的区别在于它是通过模拟硬件，并在硬件上安装操作系统来实现。&lt;/p&gt;
-&lt;p&gt;so&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;==&lt;strong&gt;Docker不是虚拟机&lt;/strong&gt;==&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;对Docker的感受：&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;比如公司买了一台新服务器，系统是centos，你要想把项目部署到服务器上，而且项目中使用到了mysql、redis、activemq、zookeeper等技术，要想项目能在服务器上正常运行，必须在新的服务器上搭建好mysql、redis、activemq、zookeeper服务环境。这样的话，在环境搭建和配置上就要花费太多的时间了（因为需要配置很多的配置文件、需要手动启动服务等）。&lt;/p&gt;
-&lt;p&gt;又或者每次重装一次系统或者换一个机器，你就要把环境重装一次，东西越多花费的时间越多、很麻烦、浪费时间和精力。&lt;/p&gt;
-&lt;p&gt;而使用Docker的话，你只需要一条命令，你就可以在你的centos系统上运行你需要的软件，比如mysql、tomcat、jdk、redis等。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;举个栗子&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;【示例1】：Docker上安装mysql&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;你需要MySQL服务，那么在docker中通过简单的命令就可以安装一个MySQL数据库服务：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker pull mysql&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-&lt;li&gt;启动mysql命令&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker run -d -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 mysql&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;很简单吧，一个mysql服务就启动完成了，就可以正常使用了。可以通过mysql客户端（Navicat、DataGrip等）连接这个mysql数据库。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;【示例2】：Docker上安装jdk&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;你需要JDK环境，那么在Docker中通过简单的命令安装一个JDK的镜像， 然后通过一条命令启动这个容器就行了，容器会自动给你安装配置好JDK环境。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker pull java&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;就这么简单的一条命令，JDK就安装好了。你可以在Docker容器的命令行中通过java -version来检测jdk是否安装成功。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;镜像、容器&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;对于新手而言，或许有点不明白镜像和容器分别是个什么东东，还是有点不明白。&lt;/p&gt;
-&lt;p&gt;你可以这样感官的理解：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;镜像 —— 相当于ISO操作系统的安装包，ISO镜像的内容是固定的，不会发生改变，可以重复使用。&lt;/p&gt;
-&lt;p&gt;容器 —— 类似于使用 ISO镜像安装的新的操作系统，可以使用一个相同的ISO镜像，安装很多操作系统。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Docker占用的资源很小。启动一个容器一般都是秒级的。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;Docker镜像、容器、仓库的介绍&#34;&gt;&lt;a href=&#34;#Docker镜像、容器、仓库的介绍&#34; class=&#34;headerlink&#34; title=&#34;Docker镜像、容器、仓库的介绍&#34;&gt;&lt;/a&gt;Docker镜像、容器、仓库的介绍&lt;/h1&gt;&lt;h2 id=&#34;Docker镜像&#34;&gt;&lt;a href=&#34;#Docker镜像&#34; class=&#34;headerlink&#34; title=&#34;Docker镜像&#34;&gt;&lt;/a&gt;Docker镜像&lt;/h2&gt;&lt;p&gt;通俗的理解镜像&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Docker的镜像是一个只读的模板，一个独立的文件系统，包括运行容器所需的数据，可以用来创建新的容器。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Docker的镜像相当于ISO操作系统的安装包，ISO镜像的内容是固定的，不会发生改变，可以重复使用。&lt;/p&gt;
-&lt;p&gt;如果上面的形容还无法让你理解Docker镜像，那我再举一个例子：&lt;/p&gt;
-&lt;p&gt;从事Java开发的人都知道类和实例的关系。直观的感觉，类就像是一个模板，根据这个类模板，可以生成很多个具体的对象实例。&lt;/p&gt;
-&lt;p&gt;则，&lt;strong&gt;Docker镜像就相当于Java的类，而通过Docker镜像生成出来的东西，我们就叫他它“容器”&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;通过上面的形容，应该可以感觉的到镜像和容器之间的关系了吧。&lt;/p&gt;
-&lt;h2 id=&#34;Docker容器&#34;&gt;&lt;a href=&#34;#Docker容器&#34; class=&#34;headerlink&#34; title=&#34;Docker容器&#34;&gt;&lt;/a&gt;Docker容器&lt;/h2&gt;&lt;p&gt;通俗的理解容器&lt;/p&gt;
-&lt;p&gt;在上一节已经介绍了镜像与容器的关系。&lt;/p&gt;
-&lt;p&gt;这里就直接copy文档中的一句话，来简单形容一下容器：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Docker镜像就相当于Java的类，而通过Docker镜像生成出来的东西，我们就叫他它“容器”&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;Docker仓库&#34;&gt;&lt;a href=&#34;#Docker仓库&#34; class=&#34;headerlink&#34; title=&#34;Docker仓库&#34;&gt;&lt;/a&gt;Docker仓库&lt;/h2&gt;&lt;p&gt;通俗的理解Docker仓库&lt;/p&gt;
-&lt;p&gt;仓库支持的操作类似git，当用户创建了自己的镜像之后就可以使用 push 命令将它上传到公有或者私有仓库，这样下次在另外一台机器上使用这个镜像时候，只需要从仓库上 pull 下来就可以了。&lt;/p&gt;
-&lt;p&gt;类似于，将某项目模块打成jar包，然后上传到私有或者公有的maven仓库，然后在其他的所有支持maven环境的机器上，都可以拉取这个jar进行使用。&lt;/p&gt;
 </content>
         <category term="Docker" />
         <updated>2021-07-12T14:58:41.205Z</updated>
